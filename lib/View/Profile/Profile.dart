@@ -13,13 +13,6 @@ import '../Widgets/tabs.dart';
 
 List<bool> isTab1Active = [true,false];
 var tabs = ['Recipe', 'Videos','Tag',];
-final List<String> _svgIcons = [
-  'images/home.svg',
-  'images/save.svg',
-  'images/notify.svg',
-  'images/profile.svg',
-];
-
 
 
 class Profile extends StatefulWidget {
@@ -31,35 +24,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   int Selected = 0;
-  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: CircleAvatar(
-        backgroundColor: Color(0xFF119475),
-        radius: responsive(40, context),
-        child:  Icon(Icons.add,size: responsive(25, context),),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CurvedNavigationBar(
 
-        selectedIndex: _selectedIndex,
-        items: _svgIcons.map((iconPath) {
-          return SvgPicture.asset(
-            height:responsiveDesign(28, context),
-            width:responsiveDesign(28, context),
-            iconPath,
-            color: _selectedIndex == _svgIcons.indexOf(iconPath)
-                ? Color(0xFF119475).withOpacity(0.4)
-                : Colors.grey.withOpacity(0.4),
-          );
-        }).toList(),
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
       body: Padding(
         padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, responsive(10, context), 0),
         child: SingleChildScrollView(
