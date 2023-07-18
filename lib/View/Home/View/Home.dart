@@ -7,6 +7,7 @@ import 'package:recipeapp/Responsive/Responsiveclass.dart';
 import 'package:recipeapp/View/Widgets/TrandingRecipeContainer.dart';
 
 import '../../../Global Styles/TextFiles.dart';
+import '../../Profile/Profile.dart';
 import '../../RecipeDetail/RecipeDetail.dart';
 import '../../Widgets/CustomBottomAppbar.dart';
 import '../../Widgets/CustomTabs.dart';
@@ -35,12 +36,10 @@ class _HomeState extends State<Home> {
     return SafeArea(
         child:Scaffold(
           // backgroundColor: Colors.white60,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor:   Color(0xFF119475),
-            onPressed: () {
-              // Perform action when "+" button is pressed
-            },
-            child: Icon(Icons.add),
+          floatingActionButton: CircleAvatar(
+            backgroundColor: Color(0xFF119475),
+            radius: responsive(40, context),
+            child:  Icon(Icons.add,size: responsive(25, context),),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: CurvedNavigationBar(
@@ -91,32 +90,37 @@ class _HomeState extends State<Home> {
 
 
                         ),
-                        Container(
-                          width: responsiveDesign(45, context),
-                          height: responsiveHeight(50, context),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
-                              fit: BoxFit.cover,
+                        InkWell(
+                          onTap: (){
+                            Get.to(Profile());
+                          },
+                          child: Container(
+                            width: responsive(45, context),
+                            height: responsive(50, context),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
+                                fit: BoxFit.cover,
+                              ),
+                              color: Color(0xFFFFCE80),
+                              borderRadius: BorderRadius.circular(responsive(10, context)),
                             ),
-                            color: Color(0xFFFFCE80),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
 
+                          ),
                         ),
 
                       ],
                     ),
                     SizedBox(
-                      height: responsiveHeight(20, context),
+                      height: responsive(20, context),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Search(context),
                         SvgPicture.asset('images/Filter.svg',
-                        width: responsiveDesign(50, context),
-                        height: responsiveHeight(50, context),),
+                        width: responsive(50, context),
+                        height: responsive(50, context),),
 
                       ],
                     ),
@@ -154,7 +158,7 @@ class _HomeState extends State<Home> {
                         Get.to(Recipedetail());
                       },
                       child: Container(
-                        height: responsiveHeight(280, context),
+                        height:responsive(240, context),
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           shrinkWrap: true,
@@ -164,7 +168,7 @@ class _HomeState extends State<Home> {
                             return
 
                                  Padding(
-                                   padding:  EdgeInsets.only(right: responsiveDesign(15, context)),
+                                   padding:  EdgeInsets.only(right: responsive(15, context)),
                                    child: TrendingRecipe(),
                                  );
 
@@ -172,18 +176,19 @@ class _HomeState extends State<Home> {
                       ),
                     ),
 
-SizedBox(height: responsiveHeight(20, context),),
+SizedBox(height: responsive(40, context),),
                     HeadingText(
                       text: 'New Recipes',
                       context: context,
                       color: Colors.black
                     ),
+                    SizedBox(height: responsive(20, context),),
                     Container(
-                      height: responsiveHeight(190, context),
+                      height: responsive(170, context),
                       child:
 
                       Padding(
-                        padding:  EdgeInsets.only(bottom: responsiveDesign(20, context)),
+                        padding:  EdgeInsets.only(bottom: responsive(20, context)),
                         child: ListView.builder(
                             physics: BouncingScrollPhysics(),
                            // shrinkWrap: true,
@@ -193,7 +198,7 @@ SizedBox(height: responsiveHeight(20, context),),
                               return
 
                                 Padding(
-                                  padding:  EdgeInsets.only(right: responsiveDesign(15, context)),
+                                  padding:  EdgeInsets.only(right: responsive(15, context)),
                                   child:    NewRecipe(),
                                 );
 

@@ -20,7 +20,7 @@ class CurvedNavigationBar extends StatelessWidget {
       shape: CircularNotchedRectangle(),
       color: backgroundColor,
       child: Container(
-        height: responsiveDesign(70, context),
+        height: responsive(70, context),
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: items.asMap().entries.map((entry) {

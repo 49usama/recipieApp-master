@@ -3,66 +3,66 @@ import 'package:flutter/material.dart';
 import 'package:recipeapp/Global%20Styles/AppFonts.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
-Widget  MediumlargeText({text,context,Color? color}){
+Widget  MediumlargeText({var center, text,context,Color? color}){
   return Text(
     '$text',
-    textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
     style: TextStyle(
       color: color,
-      fontSize: responsiveDesign(18, context),
+      fontSize: responsiveDesign(18/2, context)+ responsiveHeight(18/2, context),
       fontFamily: AppFonts.poppinsMedium,
       fontWeight: FontWeight.w600,
     ),
   );
 }
 
-Widget  HeadingText({text,context,Color? color}){
+Widget  HeadingText({var center, text,context,Color? color}){
   return Text(
     '$text',
-    textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
     style: TextStyle(
       color: color,
-      fontSize: responsiveDesign(20, context),
+      fontSize: responsiveDesign(20/2, context)+ responsiveHeight(20/2, context),
       fontFamily: AppFonts.poppinsSemiBold,
       fontWeight: FontWeight.w600,
     ),
   );
 }
 
-Widget  MediumText({text,context,Color? color}){
+Widget  MediumText({var center, text,context,Color? color}){
   return Text(
     '$text',
-    textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
     style: TextStyle(
       color: color,
-      fontSize: responsiveDesign(16, context),
+      fontSize: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
       fontFamily: AppFonts.poppinsMedium,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.bold,
     ),
   );
 }
-Widget  ExtraLargeText({text,context,Color? color}){
+Widget  ExtraLargeText({var center, text,context,Color? color}){
   return Text(
     '$text',
-    textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
     style: TextStyle(
       color: color,
-      fontSize: responsiveDesign(50, context),
+      fontSize: responsiveDesign(50/2, context)+ responsiveHeight(50/2, context),
       fontFamily: AppFonts.poppinsMedium,
       fontWeight: FontWeight.w600,
      //  height: responsiveHeight(60, context),
     ),
   );
 }
-Widget  normalText({text,context,Color? color}){
+Widget  normalText({var center, text,context,Color? color}){
   return Text(
     '$text',
-     textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
 
     style: TextStyle(
 
       color: color,
-      fontSize: responsiveDesign(14, context),
+      fontSize: responsiveDesign(14/2, context)+ responsiveHeight(14/2, context),
       fontFamily: AppFonts.poppinsSemiBold,
       fontWeight: FontWeight.w600,
       //  height: responsiveHeight(60, context),
@@ -70,13 +70,13 @@ Widget  normalText({text,context,Color? color}){
   );
 }
 
-Widget  smallText({text,context,Color? color}){
+Widget  smallText({var center, text,context,Color? color}){
   return Text(
     '$text',
-    textAlign: TextAlign.center,
+    textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
     style: TextStyle(
       color: color,
-      fontSize: responsiveDesign(11, context),
+      fontSize: responsive(11, context),
       fontFamily: AppFonts.poppinsMedium,
       fontWeight: FontWeight.w600,
       //  height: responsiveHeight(60, context),

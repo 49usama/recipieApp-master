@@ -15,15 +15,15 @@ class CustomTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(right: responsiveDesign(5, context)),
+      padding:  EdgeInsets.only(right: responsive(5, context)),
       child: Container(
       //  width: responsiveDesign(57, context),
-        height: responsiveHeight(40, context),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
+        height: responsive(40, context),
+      padding:  EdgeInsets.symmetric(horizontal: responsive(20, context), vertical: responsive(7, context)),
         decoration: ShapeDecoration(
           color: isSelected ? Color(0xFF119475) : Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(responsive(10, context)),
           ),
         ),
         child: Center(

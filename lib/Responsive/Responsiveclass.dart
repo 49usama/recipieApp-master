@@ -13,3 +13,7 @@ double responsiveDesign (double pixel, var context){
 double responsiveHeight (double pixel, var context){
     return MediaQuery.of(context).size.height *  (pixel / 926);
   }
+
+  double responsive (pixel, context){
+  return responsiveDesign(pixel/2, context)+ responsiveHeight(pixel/2, context);
+  }

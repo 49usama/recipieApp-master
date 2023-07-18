@@ -6,11 +6,11 @@ import 'package:recipeapp/Responsive/Responsiveclass.dart';
 Widget Search(context){
   return Container(
     width: responsiveDesign(280, context),
-    height: responsiveHeight(50, context),
+    height: responsive(50, context),
     decoration: ShapeDecoration(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 0.65, color: Color(0xFFD9D9D9)),
+        side: BorderSide(width: responsive(0.65, context), color: Color(0xFFD9D9D9)),
         borderRadius: BorderRadius.circular(10),
       ),
 
@@ -29,25 +29,25 @@ Widget Search(context){
               hintStyle: TextStyle(
 
                 color: Colors.black45.withOpacity(0.4),
-                fontSize: responsiveDesign(14, context),
+                fontSize: responsive(14, context),
                 fontFamily: AppFonts.poppinsMedium,
                 fontWeight: FontWeight.w400,
               ) ,
               hintText: 'Search recipe',
 
 prefixIconConstraints: BoxConstraints(
-  minHeight: responsiveHeight(25, context),
-  minWidth: responsiveDesign(25, context),
-  maxHeight: responsiveHeight(100, context),
-  maxWidth: responsiveDesign(100, context),
+  minHeight: responsive(25, context),
+  minWidth: responsive(25, context),
+  maxHeight: responsive(100, context),
+  maxWidth: responsive(100, context),
 
 ),
 prefix:  SizedBox(
-  width: responsiveDesign(6, context),
+  width: responsive(6, context),
 ),
 prefixIcon:
    Padding(
-     padding:  EdgeInsets.only(left: responsiveDesign(10, context)),
+     padding:  EdgeInsets.only(left: responsive(10, context)),
      child: SvgPicture.asset('images/search.svg',
 
   ),

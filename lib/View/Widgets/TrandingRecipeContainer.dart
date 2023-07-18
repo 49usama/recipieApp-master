@@ -9,20 +9,20 @@ class TrendingRecipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: responsiveHeight(280, context),
-      width: responsiveDesign(160, context),
+     height:responsive(200, context),
+      width: responsiveDesign(160/2, context)+ responsiveHeight(160/2, context),
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              width: responsiveDesign(170, context),
-              height: responsiveHeight(210, context),
+              width: responsive(170, context),
+              height: responsive(180, context),
               decoration: ShapeDecoration(
                 color: Color(0xFFD9D9D9).withOpacity(0.4),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(responsive(12, context)),
                 ),
               ),
               child: Column(
@@ -39,7 +39,7 @@ class TrendingRecipe extends StatelessWidget {
 
                   ),
                   Padding(
-                    padding:  EdgeInsets.only(top: responsiveHeight(20, context),left: responsiveDesign(10, context)),
+                    padding:  EdgeInsets.only(top: responsive(20, context),left: responsive(10, context)),
                     child: smallText(
                       text: 'Time',
                       context: context,
@@ -54,7 +54,7 @@ class TrendingRecipe extends StatelessWidget {
                     children: [
 
                       Padding(
-                        padding:  EdgeInsets.only(left: responsiveDesign(10, context)),
+                        padding:  EdgeInsets.only(left: responsiveDesign(10/2, context)+ responsiveHeight(10/2, context),),
                         child: normalText(
                           text: '15 mins',
                           context: context,
@@ -67,12 +67,12 @@ class TrendingRecipe extends StatelessWidget {
                       Padding(
                         padding:  EdgeInsets.only(right: responsiveDesign(10, context)),
                         child: CircleAvatar(
-                          radius: responsiveDesign(11, context),
+                          radius: responsiveDesign(11/2, context)+ responsiveHeight(11/2, context),
                           backgroundColor: Colors.white,
                           child: SvgPicture.asset(
                             'images/save.svg',
-                            height: responsiveHeight(16, context),
-                            width: responsiveDesign(16, context),
+                            height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                            width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
                           ),
                         ),
                       )
@@ -85,18 +85,18 @@ class TrendingRecipe extends StatelessWidget {
           ),
 
                CircleAvatar(
-                 radius: responsiveDesign(53, context),
+                 radius: responsiveDesign(53/2, context)+ responsiveHeight(53/2, context),
                  backgroundColor: Color(0xFFD9D9D9),
                  child: CircleAvatar(
 
-                  radius: responsiveDesign(50, context),
+                  radius: responsiveDesign(50/2, context)+ responsiveHeight(50/2, context),
                   backgroundColor: Color(0xFFD9D9D9), 
                   backgroundImage:NetworkImage('https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg'),
               ),
                ),
           Positioned(
-              top: responsiveHeight(20, context),
-              left: responsiveDesign(100, context),
+              top: responsiveDesign(20/2, context)+ responsiveHeight(20/2, context),
+              left: responsiveDesign(100/2, context)+ responsiveHeight(100/2, context),
               child: RecipeBadge(context, '4.5')),
 
         ],
@@ -107,9 +107,9 @@ class TrendingRecipe extends StatelessWidget {
 
 Widget RecipeBadge(context, rating){
   return Container(
-    width: responsiveDesign(48, context),
-    height: responsiveHeight(30, context),
-    padding:  EdgeInsets.symmetric(horizontal: responsiveDesign(7, context), vertical: responsiveHeight(3, context)),
+    width:responsive(45, context),
+    height: responsive(20, context),
+    padding:  EdgeInsets.symmetric(horizontal: responsive(4, context), vertical:responsive(3, context),),
     decoration: ShapeDecoration(
       color: Color(0xFFFFE1B3),
       shape: RoundedRectangleBorder(
@@ -121,7 +121,7 @@ Widget RecipeBadge(context, rating){
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(Icons.star,color:Color(0xffFFAD30),size: responsiveDesign(15, context),),
+        Icon(Icons.star,color:Color(0xffFFAD30),size: responsive(15, context),),
         smallText(text: rating,color: Colors.black,context: context),
       ],
     ),
