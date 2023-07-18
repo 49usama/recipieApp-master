@@ -123,7 +123,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: HeadingText(
                                 center: false,
                                 text: 'Spicy chicken burger with\nFrench fries',
@@ -227,7 +227,7 @@ class _RecipedetailState extends State<Recipedetail> {
                     ),
 
                     Padding(
-                      padding:  EdgeInsets.only(left: responsive(10, context),right: 5 ),
+                      padding:  EdgeInsets.only(left: responsive(10, context),right: 0 ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

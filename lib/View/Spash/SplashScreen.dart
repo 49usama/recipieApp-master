@@ -57,7 +57,7 @@ class Splash extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(Home());
+                    Get.to(MainPage());
                   },
                   child: Padding(
                     padding:

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:recipeapp/View/Home/View/Home.dart';
 
+import 'View/Notifications/Notifications.dart';
+import 'View/Saved Recipies/SavedRecipies.dart';
 import 'View/Spash/SplashScreen.dart';
 
 void main() {
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home:Splash(),
+        home: Splash(),
       ),
     );
   }
