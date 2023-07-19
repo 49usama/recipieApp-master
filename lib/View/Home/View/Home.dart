@@ -94,6 +94,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return     Consumer<FoodDBProvider>(
         builder: (context, recipe, child) {
+          if(recipe.dataa==null)
           recipe.loadJsonData();
 
         return Scaffold(
