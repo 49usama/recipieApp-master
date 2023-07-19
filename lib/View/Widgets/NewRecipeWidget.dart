@@ -65,6 +65,7 @@ class NewRecipe extends StatelessWidget {
                             Row(
                               children: [
                                CircleAvatar(
+                                 backgroundColor: Color(0xFFD9D9D9),
                                     radius: responsive(15, context),
                                     backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
                                   ),
@@ -108,6 +109,7 @@ class NewRecipe extends StatelessWidget {
             child: Padding(
               padding:  EdgeInsets.symmetric(horizontal: responsive(20, context)),
               child: CircleAvatar(
+                backgroundColor: Color(0xFFD9D9D9),
                 radius: responsive(40, context),
                 backgroundImage:NetworkImage('$url'),
               ),
