@@ -36,11 +36,11 @@ Widget ListNew(context,TITLEtext,trailingtext,imagePath){
             text: '$TITLEtext',
             color: Colors.black
         ),
-        trailing: normalText(
-          context: context,
-          text: '$trailingtext',
-          color: Color.fromRGBO(169, 169, 169, 1),
-        ),
+        // trailing: normalText(
+        //   context: context,
+        //   text: '$trailingtext',
+        //   color: Color.fromRGBO(169, 169, 169, 1),
+        // ),
 
   ),
       ),

@@ -9,6 +9,17 @@ import 'View/Saved Recipies/SavedRecipies.dart';
 import 'View/Spash/SplashScreen.dart';
 
 void main(){
+  String data = "200g, butter, plus extra for the tins";
+
+  // Split the data based on the comma
+  List<String> splitData = data.split(',');
+
+  // Trim any leading or trailing whitespace
+  String variable1 = splitData[0].trim();
+  String variable2 = splitData[1].trim();
+
+  print("Variable 1: $variable1");
+  print("Variable 2: $variable2");
   runApp( MultiProvider(providers: [
 
 

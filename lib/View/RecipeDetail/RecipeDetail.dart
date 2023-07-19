@@ -182,7 +182,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                     children: [
                                       HeadingText(
                                         center: false,
-                                        text: 'Laura Wilson',
+                                        text: '${recipe.dataa![widget.i].author!}',
                                         context: context,
                                         color: Colors.black
                                       ),
@@ -297,7 +297,7 @@ class _RecipedetailState extends State<Recipedetail> {
                               physics: NeverScrollableScrollPhysics(),
                               primary: true,
                               shrinkWrap: true,
-                              itemCount: 10,
+                              itemCount: recipe.dataa![widget.i].method!.length,
                               itemBuilder: (context,i){
                                 return    Padding(
                                     padding:  EdgeInsets.fromLTRB(0, responsive(5, context), 0, responsive(10, context)),
@@ -326,7 +326,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                                 center: false,
                                                   color:Color.fromRGBO(169, 169, 169, 1).withOpacity(0.6),
                                                   context: context,
-                                                  text: 'Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?'
+                                                  text: '${recipe.dataa![widget.i].method![i]}'
 
                                               ),
                                             ),
@@ -345,12 +345,20 @@ class _RecipedetailState extends State<Recipedetail> {
                             physics: NeverScrollableScrollPhysics(),
                               primary: true,
                             shrinkWrap: true,
-                              itemCount: 10,
+                              itemCount: recipe.dataa![widget.i].ingredients!.length,
                               itemBuilder: (context,i){
+                              // var data = recipe.dataa![widget.i].ingredients![i];
+
+                                // List<String> splitData = data.split(',');
+                                //
+                                // // Trim any leading or trailing whitespace
+                                // String variable1 = splitData[0].trim();
+                                // // String variable2 = splitData[1].trim();
+                                // print(' $variable1');
                             return    Padding(
                                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                                 child:
-                                ListNew(context, 'Tomatos', '500g', 'images/tomato.png')
+                                ListNew(context, '${recipe.dataa![widget.i].ingredients![i]}', '500g', 'images/tomato.png')
                             );
                           }),
                         ),

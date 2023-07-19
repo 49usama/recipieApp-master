@@ -32,6 +32,7 @@ class TrendingRecipe extends StatelessWidget {
                   Padding(
                     padding:  EdgeInsets.only(top: responsiveHeight(75, context),left: responsiveDesign(10, context),right: responsiveDesign(10, context)),
                     child: Container(
+                      height: responsive(45, context),
                       width: responsive(170, context),
                       child: normalText(
                         center: true,

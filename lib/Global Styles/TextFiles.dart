@@ -58,7 +58,7 @@ Widget  normalText({var center, text,context,Color? color}){
   return Text(
     '$text',
     textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
-    overflow: TextOverflow.ellipsis,
+    // overflow: TextOverflow.ellipsis,
     style: TextStyle(
 
       color: color,

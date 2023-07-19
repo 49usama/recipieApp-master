@@ -261,9 +261,14 @@ class _HomeState extends State<Home> {
                               int reversedIndex = (recipe.dataa!.length - 1) - i;
                               return
 
-                                Padding(
-                                  padding:  EdgeInsets.only(right: responsive(15, context)),
-                                  child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
+                                InkWell(
+                                  onTap: (){
+                                    Get.to(Recipedetail(url:images[randomNumber]  ,i:reversedIndex));
+                                  },
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(right: responsive(15, context)),
+                                    child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
+                                  ),
                                 );
 
                             }),
