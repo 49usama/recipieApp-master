@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:recipeapp/View/Home/View/Home.dart';
 
+import 'Globle Controllers/controller.dart';
 import 'View/Notifications/Notifications.dart';
 import 'View/Saved Recipies/SavedRecipies.dart';
 import 'View/Spash/SplashScreen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp( MultiProvider(providers: [
+
+
+    ChangeNotifierProvider(create: (context)=> FoodDBProvider()),
+
+
+
+  ],child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +25,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    FoodDBProvider().loadJsonData();
     return GetMaterialApp(
       home: MaterialApp(
         title: 'Flutter Demo',

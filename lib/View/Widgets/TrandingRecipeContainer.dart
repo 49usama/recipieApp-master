@@ -4,7 +4,8 @@ import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
 class TrendingRecipe extends StatelessWidget {
-  const TrendingRecipe({Key? key}) : super(key: key);
+  var url, name;
+   TrendingRecipe({this.url,this.name, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,15 @@ class TrendingRecipe extends StatelessWidget {
                 children: [
                   Padding(
                     padding:  EdgeInsets.only(top: responsiveHeight(75, context),left: responsiveDesign(10, context),right: responsiveDesign(10, context)),
-                    child: normalText(
-                      text: 'Classic Greek Salad',
-                      context: context,
-                      color: Color(0xFF484848),
-                      
+                    child: Container(
+                      width: responsive(170, context),
+                      child: normalText(
+                        center: true,
+                        text: '$name',
+                        context: context,
+                        color: Color(0xFF484848),
+                        
+                      ),
                     ),
 
                   ),
@@ -91,7 +96,7 @@ class TrendingRecipe extends StatelessWidget {
 
                   radius: responsiveDesign(50/2, context)+ responsiveHeight(50/2, context),
                   backgroundColor: Color(0xFFD9D9D9), 
-                  backgroundImage:NetworkImage('https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg'),
+                  backgroundImage:NetworkImage('$url'),
               ),
                ),
           Positioned(

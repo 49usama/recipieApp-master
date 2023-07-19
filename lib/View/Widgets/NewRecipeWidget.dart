@@ -3,7 +3,9 @@ import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
 class NewRecipe extends StatelessWidget {
-  const NewRecipe({Key? key}) : super(key: key);
+  var url, name;
+
+   NewRecipe({this.name,this.url,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,14 @@ class NewRecipe extends StatelessWidget {
                       Container(
                         width: responsive(150, context),
                         height: responsive(20, context),
-                        child: normalText(
-                          text: 'Steak with tomato sauce and bulgur rice.',
-                          context: context,
-                          color: Color(0xFF484848),
+                        child: Padding(
+                          padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, 0, 0),
+                          child: normalText(
+                            center: false,
+                            text: '$name',
+                            context: context,
+                            color: Color(0xFF484848),
+                          ),
                         ),
                       ),
                       Padding(
@@ -103,7 +109,7 @@ class NewRecipe extends StatelessWidget {
               padding:  EdgeInsets.symmetric(horizontal: responsive(20, context)),
               child: CircleAvatar(
                 radius: responsive(40, context),
-                backgroundImage:NetworkImage('https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2018/12/Shakshuka-19.jpg'),
+                backgroundImage:NetworkImage('$url'),
               ),
             ),
           ),
