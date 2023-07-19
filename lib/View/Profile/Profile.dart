@@ -69,8 +69,8 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: responsive(110, context),
-                          height: responsive(110, context),
+                          width: responsive(100, context),
+                          height: responsive(100, context),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
@@ -211,27 +211,24 @@ class _ProfileState extends State<Profile> {
 
                   Padding(
                     padding:  EdgeInsets.only(left: responsive(10, context),right: 5 ),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          for (int i = 0; i < 3; i++)
-                            InkWell(
-                              onTap: (){
-                                Selected = i;
-                                setState(() {
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        for (int i = 0; i < 3; i++)
+                          InkWell(
+                            onTap: (){
+                              Selected = i;
+                              setState(() {
 
-                                });
-                              },
+                              });
+                            },
 
-                              child: NewStepsTabes(
-                                text: tabs[i],
-                                isSelected: i == Selected, // Set isSelected to true for the initially selected tab
-                              ),
+                            child: NewStepsTabes(
+                              text: tabs[i],
+                              isSelected: i == Selected, // Set isSelected to true for the initially selected tab
                             ),
-                        ],
-                      ),
+                          ),
+                      ],
                     ),
 
                   ),
@@ -246,7 +243,7 @@ class _ProfileState extends State<Profile> {
                           padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(15, context), responsive(10, context), 0),
                           child:
                           Container(
-                            height: responsive(200, context),
+                            height: responsive(150, context),
                             // width: responsive(350, context),
                             decoration: BoxDecoration(
                               image: DecorationImage(
@@ -263,68 +260,74 @@ class _ProfileState extends State<Profile> {
                                   child: RecipeBadge(context, '4.5'),
                                 ),
 
-                                Padding(
-                                  padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(90, context), responsive(215, context), 0),
-                                  child: MediumText(
-                                      center: false,
-                                      context: context,
-                                      color: Colors.white,
-                                      text: 'Traditional spare ribs\nbaked'
-                                  ),
-                                ),
+
 
                                 Padding(
                                   padding:  EdgeInsets.only(right: responsive(1, context),top:responsive(0, context) ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, 0, 0),
-                                        child: smallText(
+                                        padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(40, context),0, 0),
+                                        child: MediumText(
                                             center: false,
                                             context: context,
-                                            text: 'By Chef John',
-                                            color: Color(0xFFD9D9D9)
+                                            color: Colors.white,
+                                            text: 'Traditional spare ribs\nbaked'
                                         ),
                                       ),
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:  EdgeInsets.only(left: responsive(10, context)),
-                                              child: SvgPicture.asset(
-                                                'images/timer.svg',
-                                                height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                              ),
-                                            ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-                                            Padding(
-                                              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                              child: normalText(
-                                                  color: Colors.white,
-                                                  context: context,
-                                                  text: '20 min'
-                                              ),
+                                        children: [
+                                          Padding(
+                                            padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, 0, 0),
+                                            child: smallText(
+                                                center: false,
+                                                context: context,
+                                                text: 'By Chef John',
+                                                color: Color(0xFFD9D9D9)
                                             ),
-                                            Padding(
-                                              padding:  EdgeInsets.only(right: responsive(10, context),left: responsive(10, context)),
-                                              child: CircleAvatar(
-                                                radius: responsiveDesign(11/2, context)+ responsiveHeight(11/2, context),
-                                                backgroundColor: Colors.white,
-                                                child: SvgPicture.asset(
-                                                  'images/save.svg',
-                                                  height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                  width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                          ),
+                                          Container(
+                                            child: Row(
+                                              children: [
+                                                Padding(
+                                                  padding:  EdgeInsets.only(left: responsive(10, context)),
+                                                  child: SvgPicture.asset(
+                                                    'images/timer.svg',
+                                                    height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                    width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                  ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
+
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                                  child: normalText(
+                                                      color: Colors.white,
+                                                      context: context,
+                                                      text: '20 min'
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding:  EdgeInsets.only(right: responsive(10, context),left: responsive(10, context)),
+                                                  child: CircleAvatar(
+                                                    radius: responsiveDesign(11/2, context)+ responsiveHeight(11/2, context),
+                                                    backgroundColor: Colors.white,
+                                                    child: SvgPicture.asset(
+                                                      'images/save.svg',
+                                                      height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                      width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          )
 
 
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),

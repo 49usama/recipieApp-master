@@ -19,7 +19,7 @@ class NewStepsTabes extends StatelessWidget {
       padding:  EdgeInsets.only(right: responsive(5, context)),
       child: Container(
           height: responsive(40, context),
-          width: responsive(140, context),
+          width: responsive(107, context),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 7),
           decoration: ShapeDecoration(
             color: isSelected ? Color(0xFF119475) : Colors.transparent,

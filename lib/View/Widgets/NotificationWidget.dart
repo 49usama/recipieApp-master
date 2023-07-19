@@ -22,12 +22,14 @@ class NotiWidget extends StatelessWidget {
 
           child: Padding(
             padding:  EdgeInsets.symmetric(horizontal: responsive(20, context),vertical: responsive(10, context)),
-            child: Row(
-              children: [
-                Container(
-                  width: responsive(315, context),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            child: Container(
+              width: responsive(315, context),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
 
                       MediumText(
@@ -35,26 +37,27 @@ class NotiWidget extends StatelessWidget {
                         text: 'New Recipe Alert!',
                         context: context,
                       ),
-                      Padding(
-                        padding:  EdgeInsets.symmetric(vertical: responsive(5, context)),
-                        child: normalText(
-                            center: false,
-                            color:Color.fromRGBO(169, 169, 169, 1).withOpacity(0.6),
-                            context: context,
-                            text: 'Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?'
-
-                        ),
+                      SvgPicture.asset(
+                          'images/unread.svg',
+                          height: responsive(28, context),
+                          width:  responsive(28, context)
                       ),
-
                     ],
+
                   ),
-                ),
-                SvgPicture.asset(
-                    'images/food.svg',
-                    height: responsive(16, context),
-                    width:  responsive(16, context)
-                ),
-              ],
+                  Padding(
+                    padding:  EdgeInsets.symmetric(vertical: responsive(5, context)),
+                    child: normalText(
+                        center: false,
+                        color:Color.fromRGBO(169, 169, 169, 1).withOpacity(0.6),
+                        context: context,
+                        text: 'Lorem Ipsum tempor incididunt ut labore et dolore,in voluptate velit esse cillum dolore eu fugiat nulla pariatur?'
+
+                    ),
+                  ),
+
+                ],
+              ),
             ),
           ),
         ),
