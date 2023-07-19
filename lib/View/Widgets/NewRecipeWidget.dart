@@ -3,9 +3,9 @@ import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
 class NewRecipe extends StatelessWidget {
-  var url, name;
+  var url, name,auther;
 
-   NewRecipe({this.name,this.url,Key? key}) : super(key: key);
+   NewRecipe({this.name,this.url,this.auther,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class NewRecipe extends StatelessWidget {
                                   ),
                                 SizedBox(width: responsive(5, context),),
                                 smallText(
-                                    text: 'By James Milner',
+                                    text: 'By $auther',
                                     context: context,
                                     color:  Color(0xFFA9A9A9),
                                   ),

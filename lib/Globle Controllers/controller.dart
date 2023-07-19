@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import '../Global Models/Model.dart';
 
 class FoodDBProvider  extends ChangeNotifier {
-  foodDB? dataa;
+  List<recipesDB> dataa=[];
   List<dynamic> _jsonData = [];
 
   List<dynamic> get jsonData => _jsonData;
@@ -31,12 +31,15 @@ class FoodDBProvider  extends ChangeNotifier {
     try {
       var jsonString = await rootBundle.loadString('assets/foodDB.json');
       var jsonData = jsonDecode(jsonString);
+for(var map in jsonData){
+  dataa.add(recipesDB.fromJson(map));
+  notifyListeners();
+}
 
-      dataa = foodDB.fromJson(jsonData as Map<String, dynamic>);
       // _jsonData = jsonData as List<dynamic>; // Remove this line
 
-      notifyListeners();
-      print(dataa!.meals![0].strCategory);
+
+      print(dataa![0].name!);
     } catch (e) {
       print('Error loading JSON data: $e');
     }

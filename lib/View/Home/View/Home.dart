@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,6 +29,8 @@ final List<String> _svgIcons = [
   'images/profile.svg',
 ];
 var selected=0;
+// Create an instance of the Random class
+final random = Random();
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -35,6 +39,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+
+
+
   var selected=0;
   int _selectedIndex = 0;
   var pages = [
@@ -95,7 +103,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return     Consumer<FoodDBProvider>(
         builder: (context, recipe, child) {
-          if(recipe.dataa==null)
+          if(recipe.dataa.isEmpty)
           recipe.loadJsonData();
 
         return Scaffold(
@@ -191,32 +199,43 @@ class _HomeState extends State<Home> {
                       height: responsiveHeight(40, context),
                     ),
 
-                    InkWell(
-                      onTap: () {
-                        Get.to(Recipedetail());
-                      },
-                      child: Container(
-                        height:responsive(240, context),
-                        child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context,i){
-                              return Cat[selected]=="All"?
-                                Padding(
+                    Container(
+                      height:responsive(240, context),
+                      child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: //10,
+                          recipe.dataa!.length,
+
+                          itemBuilder: (context,i){
+
+                            // Generate a random number between 0 and 40 (inclusive)
+                            int randomNumber = random.nextInt(41);
+                            return
+                              // Cat[selected]=="All"?
+                              InkWell(
+                                onTap: (){
+                                  Get.to(Recipedetail(url:images[randomNumber]  ,i:i));
+                                },
+                                child: Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
-                                  child: TrendingRecipe(url: recipe.dataa!.meals![i].strMealThumb,name:  recipe.dataa!.meals![i].strMeal,),
-                                ):Cat[selected]==recipe.dataa!.meals![i].strCategory?Padding(
-                                padding:  EdgeInsets.only(right: responsive(15, context)),
-                                child: TrendingRecipe(url: recipe.dataa!.meals![i].strMealThumb,name:  recipe.dataa!.meals![i].strMeal,),
-                              ):Container();
+                                  child: TrendingRecipe(url: images[randomNumber],name:  recipe.dataa![i].name,),
+                                ),);
+                            //   ):Cat[selected]==recipe.dataa!.meals![i].strCategory? InkWell(
+                            //   onTap: (){
+                            //     Get.to(Recipedetail(url:images[randomNumber] ,i:i));
+                            //   },
+                            //     child: Padding(
+                            //     padding:  EdgeInsets.only(right: responsive(15, context)),
+                            //     child: TrendingRecipe(url: images[randomNumber],name:  recipe.dataa!.meals![i].strMeal,),
+                            // ),
+                            //   ):Container();Container
 
 
 
 
-                            }),
-                      ),
+                          }),
                     ),
 
                     SizedBox(height: responsive(40, context),),
@@ -238,12 +257,13 @@ class _HomeState extends State<Home> {
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
                             itemBuilder: (context,i){
-                              int reversedIndex = (recipe.dataa!.meals!.length - 1) - i;
+                              int randomNumber = random.nextInt(41);
+                              int reversedIndex = (recipe.dataa!.length - 1) - i;
                               return
 
                                 Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
-                                  child:    NewRecipe(url: recipe.dataa!.meals![reversedIndex].strMealThumb,name:  recipe.dataa!.meals![reversedIndex].strMeal,),
+                                  child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
                                 );
 
                             }),
