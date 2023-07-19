@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 import 'package:recipeapp/View/Saved%20Recipies/SavedRecipies.dart';
 import 'package:recipeapp/View/Widgets/TrandingRecipeContainer.dart';
+import 'package:recipeapp/utils/utils.dart';
 
 import '../../../Global Styles/TextFiles.dart';
 import '../../../Globle Controllers/controller.dart';
@@ -18,7 +19,7 @@ import '../../Widgets/CustomTabs.dart';
 import '../../Widgets/NewRecipeWidget.dart';
 import '../../Widgets/SearchWidget.dart';
 
-final List<String> tabs = ['All', 'Indian', 'Italian','Asian','Chinese','Fruit','Vegitables','Protien','Cereal','Local Dishes',];
+//final List<String> tabs = ['All', 'Indian', 'Italian','Asian','Chinese','Fruit','Vegitables','Protien','Cereal','Local Dishes',];
 final List<String> _svgIcons = [
   'images/home.svg',
   'images/save.svg',
@@ -168,7 +169,7 @@ class _HomeState extends State<Home> {
                         padding:  EdgeInsets.only(top: responsiveHeight(20, context)),
                         child: Row(
                           children: [
-                            for (int i = 0; i < tabs.length; i++)
+                            for (int i = 0; i < Cat.length; i++)
                               InkWell(
                                 onTap: (){
                                   selected = i;
@@ -178,7 +179,7 @@ class _HomeState extends State<Home> {
                                 },
 
                                 child: CustomTab(
-                                  text: tabs[i],
+                                  text: Cat[i],
                                   isSelected: i == selected, // Set isSelected to true for the initially selected tab
                                 ),
                               ),
@@ -202,12 +203,17 @@ class _HomeState extends State<Home> {
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
                             itemBuilder: (context,i){
-                              return
-
+                              return Cat[selected]=="All"?
                                 Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
                                   child: TrendingRecipe(url: recipe.dataa!.meals![i].strMealThumb,name:  recipe.dataa!.meals![i].strMeal,),
-                                );
+                                ):Cat[selected]==recipe.dataa!.meals![i].strCategory?Padding(
+                                padding:  EdgeInsets.only(right: responsive(15, context)),
+                                child: TrendingRecipe(url: recipe.dataa!.meals![i].strMealThumb,name:  recipe.dataa!.meals![i].strMeal,),
+                              ):Container();
+
+
+
 
                             }),
                       ),
