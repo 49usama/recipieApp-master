@@ -41,6 +41,17 @@ dependencies:
   http:
   flutter_svg:
   flutter_swipe_action_cell: ^3.1.2
+  firebase_auth: ^4.2.9
+  firebase_core: ^2.7.0
+  cloud_firestore: ^4.0.1
+  flutter_spinkit: ^5.1.0
+  fluttertoast: ^8.2.1
+  image_picker: ^0.8.7+5
+  firebase_storage: ^11.2.1
+  flutter_image_compress: ^2.0.3
+  firebase_messaging: ^14.6.1
+  shared_preferences: ^2.1.0
+
 
 
 
