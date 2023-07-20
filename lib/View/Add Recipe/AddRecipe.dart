@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:recipeapp/Global%20Styles/TextFiles.dart';
@@ -18,7 +19,8 @@ class Addrecipe extends StatefulWidget {
 class _AddrecipeState extends State<Addrecipe> {
   List<Widget> ingredients = [];
   List<Widget> procedures = [];
-
+  List<String> ingredientsvalues = [];
+  var text;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,59 +114,102 @@ class _AddrecipeState extends State<Addrecipe> {
                                       primary: true,
                                       itemCount: ingredients.length,
                                       itemBuilder: (context, index) {
+                                        print(ingredientsvalues.length-1==index?ingredientsvalues[index]:"",);
                                         final item = ingredients[index];
-                                        return Dismissible(
-                                          key: UniqueKey(), // Use a unique key for each ingredient
-                                          direction: DismissDirection
-                                              .endToStart, // Swipe from right to left
-                                          onDismissed: (direction) {
 
-                                              setState(() {
-                                                ingredients.remove(item); // Remove the ingredient using its key
-                                              });
+                                        return
+                                          SwipeActionCell(
+                                          key: ObjectKey(item), /// this key is necessary
+                                          trailingActions: <SwipeAction>[
+                                            SwipeAction(
+                                                title: "delete",
+                                                onTap: (CompletionHandler handler) async {
+print(ingredientsvalues);
+
+                                                  ingredients.remove(item);
+if(ingredientsvalues.length-1<index){
+
+} else {
+  final ingri = ingredientsvalues[index];
+  ingredientsvalues.remove(ingri);
+}
 
 
-                                            // Show a snackbar to notify the user that the ingredient is deleted
-                                            ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(
-                                                backgroundColor: Color(0xFF119475),
-                                                content: Text('Ingredient Deleted'),
-                                                action: SnackBarAction(
-                                                  textColor: Colors.white,
-                                                  label: 'Undo',
-                                                  onPressed: () {
-                                                    ingredients.insert(
-                                                        index, ingredients[index]);
-                                                    // Restore the ingredient when the "Undo" button is pressed
-                                                    setState(() {});
-                                                  },
-                                                ),
-                                              ),
-                                            );
-                                            Builder(builder: (context) {
-                                              setState(() {
 
-                                              });
-                                              return Container(); // This empty container will replace the Dismissible in the tree.
-                                            });
-                                          },
-                                          background: Container(
-                                            height: responsive(20, context),
-                                            color: Colors.red,
-                                            alignment: Alignment.centerRight,
-                                            padding: EdgeInsets.only(right: 16.0),
-                                            child: Icon(Icons.delete, color: Colors.white),
-                                          ),
-                                          child: Padding(
+                                                  setState(() {});
+                                                },
+                                                color: Colors.red),
+                                          ],
+                                          child:
+                                        Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 0, responsive(10, context), 0, 0),
                                             child: MyCustomTextField(
+onchange: (value){
+  ingredientsvalues.insert(index,value);
+print(index);
+print(ingredientsvalues.length-1);
+},
+                                              text: ingredientsvalues.length-1<index?"":ingredientsvalues.isEmpty?"":ingredientsvalues[index],
                                               height: responsive(55, context),
                                               width: responsive(420, context),
                                               hintText: 'Ingredients',
                                             ),
                                           ),
                                         );
+                                        //   Dismissible(
+                                        //   key: UniqueKey(), // Use a unique key for each ingredient
+                                        //   direction: DismissDirection
+                                        //       .endToStart, // Swipe from right to left
+                                        //   onDismissed: (direction) {
+                                        //
+                                        //       setState(() {
+                                        //         ingredients.remove(item); // Remove the ingredient using its key
+                                        //       });
+                                        //
+                                        //
+                                        //     // Show a snackbar to notify the user that the ingredient is deleted
+                                        //     ScaffoldMessenger.of(context).showSnackBar(
+                                        //       SnackBar(
+                                        //         backgroundColor: Color(0xFF119475),
+                                        //         content: Text('Ingredient Deleted'),
+                                        //         action: SnackBarAction(
+                                        //           textColor: Colors.white,
+                                        //           label: 'Undo',
+                                        //           onPressed: () {
+                                        //             ingredients.insert(
+                                        //                 index, ingredients[index]);
+                                        //             // Restore the ingredient when the "Undo" button is pressed
+                                        //             setState(() {});
+                                        //           },
+                                        //         ),
+                                        //       ),
+                                        //     );
+                                        //     Builder(builder: (context) {
+                                        //       setState(() {
+                                        //
+                                        //       });
+                                        //       return Container(); // This empty container will replace the Dismissible in the tree.
+                                        //     });
+                                        //   },
+                                        //   background: Container(
+                                        //     height: responsive(20, context),
+                                        //     color: Colors.red,
+                                        //     alignment: Alignment.centerRight,
+                                        //     padding: EdgeInsets.only(right: 16.0),
+                                        //     child: Icon(Icons.delete, color: Colors.white),
+                                        //   ),
+                                        //   child: Padding(
+                                        //     padding: EdgeInsets.fromLTRB(
+                                        //         0, responsive(10, context), 0, 0),
+                                        //     child: MyCustomTextField(
+                                        //
+                                        //       height: responsive(55, context),
+                                        //       width: responsive(420, context),
+                                        //       hintText: 'Ingredients',
+                                        //     ),
+                                        //   ),
+                                        // );
                                       },
                                     ),
                                     Padding(

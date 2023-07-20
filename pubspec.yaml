@@ -40,6 +40,7 @@ dependencies:
   get:
   http:
   flutter_svg:
+  flutter_swipe_action_cell: ^3.1.2
 
 
 

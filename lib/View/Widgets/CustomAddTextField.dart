@@ -8,8 +8,9 @@ class MyCustomTextField extends StatelessWidget {
   final double width;
   final double height;
   final String hintText;
-
-  MyCustomTextField({required this.width, required this.height, required this.hintText});
+  var onchange;
+  var text;
+  MyCustomTextField({this.onchange,this.text, required this.width, required this.height, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,9 @@ class MyCustomTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        onChanged: onchange,
+        initialValue: text??"",
+        autofocus: false,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: Color(0xFFD9D9D9),
