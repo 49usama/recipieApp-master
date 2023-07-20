@@ -13,6 +13,7 @@ import 'package:recipeapp/utils/utils.dart';
 
 import '../../../Global Styles/TextFiles.dart';
 import '../../../Globle Controllers/controller.dart';
+import '../../Add Recipe/AddRecipe.dart';
 import '../../Notifications/Notifications.dart';
 import '../../Profile/Profile.dart';
 import '../../RecipeDetail/RecipeDetail.dart';
@@ -58,10 +59,15 @@ class _MainPageState extends State<MainPage> {
     return SafeArea(
         child:Scaffold(
           // backgroundColor: Colors.white60,
-          floatingActionButton: CircleAvatar(
-            backgroundColor: Color(0xFF119475),
-            radius: responsive(40, context),
-            child:  Icon(Icons.add,size: responsive(25, context),),
+          floatingActionButton: InkWell(
+            onTap: (){
+              Get.to(Addrecipe());
+            },
+            child: CircleAvatar(
+              backgroundColor: Color(0xFF119475),
+              radius: responsive(30, context),
+              child:  Icon(Icons.add,size: responsive(25, context),),
+            ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           bottomNavigationBar: CurvedNavigationBar(
