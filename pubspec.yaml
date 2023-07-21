@@ -51,6 +51,7 @@ dependencies:
   flutter_image_compress: ^2.0.3
   firebase_messaging: ^14.6.1
   shared_preferences: ^2.1.0
+  cached_network_image: ^3.0.0
 
 
 

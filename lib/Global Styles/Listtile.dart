@@ -21,13 +21,16 @@ Widget ListNew(context,TITLEtext,trailingtext,imagePath){
         //   borderRadius: BorderRadius.circular(10.0),
         // ),
         leading: Container(
-          width: responsive(40, context),
-          height: responsive(40, context),
+          width: responsive(45, context),
+          height: responsive(45, context),
           decoration: BoxDecoration(
             color: Color(0xFFFFFFFF),
             borderRadius: BorderRadius.circular(10),
           ),
-          child:  Image.asset('$imagePath'),
+          child:  Padding(
+            padding:  EdgeInsets.all(responsive(5, context)),
+            child: Image.asset('$imagePath'),
+          ),
         ),
 
         title: normalText(

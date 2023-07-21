@@ -18,6 +18,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   prefs = await SharedPreferences.getInstance();
 
+
   String data = "200g, butter, plus extra for the tins";
 
   // Split the data based on the comma
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    FoodDBProvider().loadJsonData();
+    // FoodDBProvider().loadJsonData();
     return GetMaterialApp(
       home: MaterialApp(
 

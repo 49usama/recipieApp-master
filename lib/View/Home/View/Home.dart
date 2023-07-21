@@ -109,8 +109,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return     Consumer<FoodDBProvider>(
         builder: (context, recipe, child) {
-          if(recipe.dataa.isEmpty)
-          recipe.loadJsonData();
+
+          if(recipe.dataa.isEmpty){
+            recipe.fetchDataFromFirestore();
+          }
+          // recipe.loadJsonData();
 
         return Scaffold(
           body: Padding(
@@ -222,11 +225,11 @@ class _HomeState extends State<Home> {
                               // Cat[selected]=="All"?
                               InkWell(
                                 onTap: (){
-                                  Get.to(Recipedetail(url:images[randomNumber]  ,i:i));
+                                  Get.to(Recipedetail(url:recipe.dataa![i].url  ,i:i));
                                 },
                                 child: Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
-                                  child: TrendingRecipe(url: images[randomNumber],name:  recipe.dataa![i].name,),
+                                  child: TrendingRecipe(url: recipe.dataa![i].url,name:  recipe.dataa![i].name,),
                                 ),);
                             //   ):Cat[selected]==recipe.dataa!.meals![i].strCategory? InkWell(
                             //   onTap: (){

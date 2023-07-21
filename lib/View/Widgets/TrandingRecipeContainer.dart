@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipeapp/Global%20Styles/TextFiles.dart';
@@ -97,7 +98,28 @@ class TrendingRecipe extends StatelessWidget {
 
                   radius: responsiveDesign(50/2, context)+ responsiveHeight(50/2, context),
                   backgroundColor: Color(0xFFD9D9D9), 
-                  backgroundImage:NetworkImage('$url'),
+                  child: ClipOval(
+                    child: CachedNetworkImage(
+                      // placeholder: (context, url) => SvgPicture.asset(
+                      //     width: 100,
+                      //     height:100,
+                      //     // fit: BoxFit.cover,
+                      //     'images/dummydish.svg'
+                      // ),
+                      errorWidget: (context, url, error) => SvgPicture.asset(
+                          width: 100,
+                          height: 100,
+                          'images/dummydish.svg'
+                      ),
+                      imageUrl: '$url',
+                      // replace with the URL of your image
+                      fit: BoxFit.cover,
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+
+                  // NetworkImage('$url'),
               ),
                ),
           Positioned(

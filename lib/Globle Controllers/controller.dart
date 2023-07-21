@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -13,20 +14,6 @@ class FoodDBProvider  extends ChangeNotifier {
 
   List<dynamic> get jsonData => _jsonData;
 
-  // Future<void> loadJsonData() async {
-  //   try {
-  //     var jsonString = (await rootBundle.loadString('assets/foodDB.json'));
-  //     // print(jsonString);
-  //     var data = json.decode(jsonString);
-  //     // _jsonData = data as List;
-  //
-  //     dataa = foodDB.fromJson(jsonString as Map<String, dynamic>);
-  //     // notifyListeners();
-  //     print(data);
-  //   } catch (e) {
-  //     print('Error loading JSON data: $e');
-  //   }
-  // }
   Future<void> loadJsonData() async {
     try {
       var jsonString = await rootBundle.loadString('assets/foodDB.json');
@@ -36,13 +23,38 @@ for(var map in jsonData){
   notifyListeners();
 }
 
-      // _jsonData = jsonData as List<dynamic>; // Remove this line
+
 
 
       print(dataa![0].name!);
     } catch (e) {
       print('Error loading JSON data: $e');
     }
+  }
+
+
+
+
+  Future<void> fetchDataFromFirestore() async {
+
+
+    try {
+      dataa.clear();
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('Recipes').orderBy('time').get();
+      querySnapshot.docs.reversed.forEach((document) async {
+        // print("data = ${document.data()}");
+        var map = document.data();
+
+        dataa.add(recipesDB.fromJson(map as Map<String, dynamic>));
+
+      });
+    loadJsonData();
+    } catch (e) {
+      print("Error fetching data from Firestore: $e");
+    }
+        print(dataa[0].author);
+    notifyListeners();
+
   }
 
 
