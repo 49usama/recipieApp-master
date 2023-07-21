@@ -26,6 +26,7 @@ class MyCustomTextField extends StatelessWidget {
       ),
       child: TextFormField(
         onChanged: onchange,
+
         initialValue: text??"",
         autofocus: false,
         decoration: InputDecoration(

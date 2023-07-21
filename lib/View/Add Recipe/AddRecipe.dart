@@ -1,10 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:recipeapp/Global%20Styles/TextFiles.dart';
+import 'package:recipeapp/View/Home/View/Home.dart';
 
 import '../../Responsive/Responsiveclass.dart';
 import '../Widgets/CustomAddTextField.dart';
@@ -20,17 +27,75 @@ class Addrecipe extends StatefulWidget {
 class _AddrecipeState extends State<Addrecipe> {
   List<Widget> ingredients = [];
   List<Widget> procedures = [];
+  bool isLoading = false;
 
   List<String> ingredientsvalues = [];
   List<String> proceduressvalues = [];
 
-  void uploadDataToFirestore(Map<String, dynamic> data) {
-    FirebaseFirestore.instance.collection('Recipes').add(data);
+  Future<void> uploadDataToFirestore(Map<String, dynamic> data) async{
+    await FirebaseFirestore.instance.collection('Recipes').add(data);
+
   }
+
+
+
+
+  File? _imageFile;
+  var imgpath,pickedImage;
+  String _uploadedImageUrl='';
+  var downloadUrl;
+  // Function to pick an image from gallery
+  Future<void> _pickImage() async {
+    final imagePicker = ImagePicker();
+     pickedImage = await imagePicker.pickImage(source: ImageSource.gallery,imageQuality:40);
+
+    if (pickedImage != null) {
+      setState(() {
+        imgpath= pickedImage.path;
+        _imageFile = File(pickedImage.path);
+        // _uploadImage();
+      });
+    }
+  }
+
+  // Function to upload profile image to storage and save image URL to Firestore
+  Future<void> _uploadImage() async {
+    if (_imageFile == null) return;
+
+    try {
+      // Step 1: Upload the image to Firebase Storage
+      final storage = FirebaseStorage.instance;
+      final storageRef = storage.ref().child('Recipe_images/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      final uploadTask = storageRef.putFile(_imageFile!);
+      final snapshot = await uploadTask.whenComplete(() {});
+
+      // Step 2: Get the uploaded image's URL
+      if (snapshot.state == TaskState.success) {
+        downloadUrl = await storageRef.getDownloadURL();
+
+
+          setState(() {
+
+          });
+
+
+
+          Fluttertoast.showToast(msg: "PIC Uploaded :) ");
+
+        }
+      }
+    catch (error) {
+      print("Error uploading image: $error");
+    }
+  }
+
+
+
 
 
   @override
   Widget build(BuildContext context) {
+    print('path is ${imgpath}');
     return Scaffold(
         body: SafeArea(
             child: Stack(
@@ -92,10 +157,20 @@ class _AddrecipeState extends State<Addrecipe> {
                                     )
                                   ],
                                 ),
-                                SvgPicture.asset(
+                               imgpath==null? SvgPicture.asset(
                                   'images/ImageUpload.svg',
                                   height: responsive(100, context),
-                                ),
+                                ):Container(
+                                 height: responsive(110, context),
+                                 width: responsive(192, context),
+                                 decoration: BoxDecoration(
+                                   image: DecorationImage(
+                                     image: FileImage(File(imgpath)),
+                                     fit: BoxFit.fitWidth,
+                                   ),
+                                   borderRadius: BorderRadius.circular(10),
+                                 ),
+                               ),
                               ],
                             ),
                             Padding(
@@ -112,7 +187,9 @@ class _AddrecipeState extends State<Addrecipe> {
                                   ),
                                   CustomButton(
                                     text: 'Pick Image',
-                                    onTap: () {},
+                                    onTap: () {
+                                      _pickImage();
+                                    },
                                   )
                                 ],
                               ),
@@ -168,7 +245,13 @@ class _AddrecipeState extends State<Addrecipe> {
                                           0, responsive(0, context), 0, 0),
                                       child: MyCustomTextField(
                                         onchange: (value) {
-                                          ingredientsvalues.insert(index, value);
+                                          try{
+                                            ingredientsvalues[index]=value;
+                                          } catch(e){
+                                            print(e);
+                                            ingredientsvalues.add(value);
+                                          }
+
                                           print(index);
                                           print(ingredientsvalues.length - 1);
                                         },
@@ -265,15 +348,11 @@ class _AddrecipeState extends State<Addrecipe> {
                                   Padding(
                                     padding:  EdgeInsets.only(top: responsive(10, context)),
                                     child: SwipeActionCell(
-
-
                                       key: ObjectKey(items),
-
                                       /// this key is necessary
                                       trailingActions: <SwipeAction>[
                                         SwipeAction(
                                             performsFirstActionWithFullSwipe: true,
-
                                           icon: Icon(Icons.delete,color: Colors.white,size: responsive(30, context),),
                                           backgroundRadius: 10.0,
                                           //   title: "delete",
@@ -300,7 +379,17 @@ class _AddrecipeState extends State<Addrecipe> {
                                             0, responsive(0, context), 0, 0),
                                         child: MyCustomTextField(
                                           onchange: (value) {
-                                            proceduressvalues.insert(index, value);
+
+                                              try{
+                                                proceduressvalues[index]=value;
+                                              } catch(e){
+                                                print(e);
+                                                proceduressvalues.add(value);
+                                              }
+
+
+
+                                            // proceduressvalues[index].isEmpty?proceduressvalues.add(value):proceduressvalues[index] = value;
                                             print(index);
                                             print(proceduressvalues.length - 1);
                                           },
@@ -373,18 +462,51 @@ class _AddrecipeState extends State<Addrecipe> {
           child: Padding(
             padding: EdgeInsets.only(
                 bottom: responsive(20, context), top: responsive(40, context)),
-            child: CustomButton(
+            child: isLoading == true?Container(
+              width: responsive(192, context),
+              height: responsive(55, context),
+              // padding: const EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+              decoration: ShapeDecoration(
+                color: Color(0xFF119475),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  height: responsive(20, context),
+                  width: responsive(20, context),
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 0.9,
+
+                  ),
+
+                ),
+              ),
+            ): CustomButton(
+
               text: 'Submit',
-              onTap: () {
-                uploadDataToFirestore({
+              onTap: () async {
+                isLoading = true;
+                setState(() {
+
+                });
+                await _uploadImage();
+               await  uploadDataToFirestore({
                   "Name": "Christmas pie",
-                  "url": "https://www.bbcgoodfood.com/recipes/2793/christmas-pie",
+                  "url": "$downloadUrl",
                   "timetaken": "20Mins",
                   "Description": "Combine a few key Christmas flavours here to make a pie that both children and adults will adore",
                   "Author": "Mary Cadogan",
                   "Ingredients": ingredientsvalues,
                   "Method": proceduressvalues
                 });
+                isLoading = false;
+                setState(() {
+
+                });
+                Get.back();
               },
             ),
           ),
