@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,6 +14,7 @@ import 'package:recipeapp/utils/utils.dart';
 
 import '../../../Global Styles/TextFiles.dart';
 import '../../../Globle Controllers/controller.dart';
+import '../../../Globle Controllers/userdataclass.dart';
 import '../../Add Recipe/AddRecipe.dart';
 import '../../Notifications/Notifications.dart';
 import '../../Profile/Profile.dart';
@@ -21,6 +23,7 @@ import '../../Widgets/CustomBottomAppbar.dart';
 import '../../Widgets/CustomTabs.dart';
 import '../../Widgets/NewRecipeWidget.dart';
 import '../../Widgets/SearchWidget.dart';
+import '../../authentication/Login.dart';
 
 //final List<String> tabs = ['All', 'Indian', 'Italian','Asian','Chinese','Fruit','Vegitables','Protien','Cereal','Local Dishes',];
 final List<String> _svgIcons = [
@@ -61,6 +64,7 @@ class _MainPageState extends State<MainPage> {
           // backgroundColor: Colors.white60,
           floatingActionButton: InkWell(
             onTap: (){
+              FirebaseAuth.instance.currentUser==null?Get.to(Login()):
               Get.to(Addrecipe());
             },
             child: CircleAvatar(
@@ -107,10 +111,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return     Consumer<FoodDBProvider>(
-        builder: (context, recipe, child) {
+    return     Consumer2<UserDataController,FoodDBProvider>(
+        builder: (context, UserData,recipe, child) {
+
 
           if(recipe.dataa.isEmpty){
+            UserData.fetchDataFromFirestore();
             recipe.fetchDataFromFirestore();
           }
           // recipe.loadJsonData();
@@ -147,7 +153,8 @@ class _HomeState extends State<Home> {
                         ),
                         InkWell(
                           onTap: (){
-                            Get.to(Profile());
+                           Get.to(Profile());
+                            // Get.to(Login());
                           },
                           child: Container(
                             width: responsive(45, context),

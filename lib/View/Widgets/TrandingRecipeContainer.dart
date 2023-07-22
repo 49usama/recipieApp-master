@@ -100,12 +100,6 @@ class TrendingRecipe extends StatelessWidget {
                   backgroundColor: Color(0xFFD9D9D9), 
                   child: ClipOval(
                     child: CachedNetworkImage(
-                      // placeholder: (context, url) => SvgPicture.asset(
-                      //     width: 100,
-                      //     height:100,
-                      //     // fit: BoxFit.cover,
-                      //     'images/dummydish.svg'
-                      // ),
                       errorWidget: (context, url, error) => SvgPicture.asset(
                           width: 100,
                           height: 100,

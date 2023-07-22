@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import '../Global Models/Model.dart';
 
 class FoodDBProvider  extends ChangeNotifier {
+
   List<recipesDB> dataa=[];
   List<dynamic> _jsonData = [];
 

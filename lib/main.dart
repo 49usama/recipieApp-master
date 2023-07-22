@@ -6,6 +6,7 @@ import 'package:recipeapp/View/Home/View/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Globle Controllers/controller.dart';
+import 'Globle Controllers/userdataclass.dart';
 import 'View/Notifications/Notifications.dart';
 import 'View/Saved Recipies/SavedRecipies.dart';
 import 'View/Spash/SplashScreen.dart';
@@ -34,6 +35,7 @@ Future<void> main() async {
 
 
     ChangeNotifierProvider(create: (context)=> FoodDBProvider()),
+    ChangeNotifierProvider(create: (context)=> UserDataController()),
 
 
 

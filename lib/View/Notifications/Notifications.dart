@@ -32,7 +32,7 @@ class _NotificationsState extends State<Notifications> {
                     mainAxisAlignment: MainAxisAlignment.center,
                   children:[
                       HeadingText(
-                          text: 'Profile',
+                          text: 'Notifications',
                           context: context,
                           center: false
                       ),

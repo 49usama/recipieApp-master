@@ -7,6 +7,7 @@ import '../../Global Styles/Buttons.dart';
 import '../../Global Styles/TextFiles.dart';
 import '../../Responsive/Responsiveclass.dart';
 import '../Home/View/Home.dart';
+import '../authentication/Login.dart';
 
 class Splash extends StatelessWidget {
   const Splash({Key? key}) : super(key: key);
@@ -58,6 +59,7 @@ class Splash extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.to(MainPage());
+                    // Get.to(Login());
                   },
                   child: Padding(
                     padding:

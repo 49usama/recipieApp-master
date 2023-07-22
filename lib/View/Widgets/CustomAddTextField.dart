@@ -8,6 +8,7 @@ class MyCustomTextField extends StatelessWidget {
   final double width;
   final double height;
   final String hintText;
+
   var onchange;
   var text;
   MyCustomTextField({this.onchange,this.text, required this.width, required this.height, required this.hintText});
@@ -25,11 +26,16 @@ class MyCustomTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+
         onChanged: onchange,
 
         initialValue: text??"",
         autofocus: false,
         decoration: InputDecoration(
+          // helperText: title,
+          // labelText: title,
+          // label: title,
+
           hintText: hintText,
           hintStyle: TextStyle(color: Color(0xFFD9D9D9),
             fontSize: responsive(14, context),
