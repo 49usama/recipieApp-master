@@ -17,6 +17,7 @@ import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
 import '../../Globle Controllers/userdataclass.dart';
+import '../Home/View/Home.dart';
 import '../Widgets/CustomBottomAppbar.dart';
 import '../Widgets/NewTab.dart';
 import '../Widgets/TrandingRecipeContainer.dart';
@@ -89,10 +90,17 @@ class _ProfileState extends State<Profile> {
                             ),
                             Padding(
                               padding:  EdgeInsets.only(right: responsive(20, context),),
-                              child: SvgPicture.asset(
-                                  'images/more.svg',
-                                  height: responsive(25, context),
-                                  width:  responsive(25, context)
+                              child: InkWell(
+                                onTap: () async {
+                                 await FirebaseAuth.instance.signOut().then((value) {
+                                   Get.to(MainPage());
+                                 });
+                                },
+                                child: SvgPicture.asset(
+                                    'images/more.svg',
+                                    height: responsive(25, context),
+                                    width:  responsive(25, context)
+                                ),
                               ),
                             )
                           ],

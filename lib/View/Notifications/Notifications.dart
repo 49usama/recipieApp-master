@@ -18,6 +18,7 @@ class Notifications extends StatefulWidget {
 
 class _NotificationsState extends State<Notifications> {
   var Selected = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
