@@ -1,5 +1,6 @@
 class recipesDB {
   var name;
+  var email;
   var url;
   var description;
   var author;
@@ -8,6 +9,7 @@ class recipesDB {
 
   recipesDB(
       {this.name,
+      this.email,
         this.url,
         this.description,
         this.author,
@@ -16,6 +18,7 @@ class recipesDB {
 
   recipesDB.fromJson(Map<String, dynamic> json) {
     name = json['Name'];
+    email = json['email'];
     url = json['url'];
     description = json['Description'];
     author = json['Author'];
@@ -26,6 +29,7 @@ class recipesDB {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['Name'] = this.name;
+    data['email'] = this.email;
     data['url'] = this.url;
     data['Description'] = this.description;
     data['Author'] = this.author;

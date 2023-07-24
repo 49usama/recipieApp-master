@@ -214,7 +214,18 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: responsiveHeight(40, context),
                     ),
+                Center(
+                  child: recipe.dataa.isEmpty?Padding(
+                    padding:  EdgeInsets.only(top: responsive(50, context)),
+                    child: Container(
+                      height: responsive(50, context),
+                      width: responsive(50, context),
 
+                      child: CircularProgressIndicator(
+                        color: Colors.teal,
+                      ),
+                    ),
+                  ) :
                     Container(
                       height:responsive(240, context),
                       child: ListView.builder(
@@ -232,7 +243,7 @@ class _HomeState extends State<Home> {
                               // Cat[selected]=="All"?
                               InkWell(
                                 onTap: (){
-                                  Get.to(Recipedetail(url:recipe.dataa![i].url  ,i:i));
+                                  Get.to(Recipedetail(url:recipe.dataa![i].url  ,i:recipe.dataa![i]));
                                 },
                                 child: Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
@@ -252,7 +263,7 @@ class _HomeState extends State<Home> {
 
 
                           }),
-                    ),
+                    )),
 
                     SizedBox(height: responsive(40, context),),
                     HeadingText(
@@ -261,33 +272,45 @@ class _HomeState extends State<Home> {
                         color: Colors.black
                     ),
                     SizedBox(height: responsive(20, context),),
-                    Container(
-                      height: responsive(170, context),
-                      child:
+                    Center(
+                      child: recipe.dataa.isEmpty?Padding(
+                        padding:  EdgeInsets.only(top: responsive(50, context)),
+                        child: Container(
+                          height: responsive(50, context),
+                          width: responsive(50, context),
 
-                      Padding(
-                        padding:  EdgeInsets.only(bottom: responsive(20, context)),
-                        child: ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            // shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context,i){
-                              int randomNumber = random.nextInt(41);
-                              int reversedIndex = (recipe.dataa!.length - 1) - i;
-                              return
+                          child: CircularProgressIndicator(
+                            color: Colors.teal,
+                          ),
+                        ),
+                      ) : Container(
+                        height: responsive(170, context),
+                        child:
 
-                                InkWell(
-                                  onTap: (){
-                                    Get.to(Recipedetail(url:images[randomNumber]  ,i:reversedIndex));
-                                  },
-                                  child: Padding(
-                                    padding:  EdgeInsets.only(right: responsive(15, context)),
-                                    child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
-                                  ),
-                                );
+                        Padding(
+                          padding:  EdgeInsets.only(bottom: responsive(20, context)),
+                          child: ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              // shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder: (context,i){
+                                int randomNumber = random.nextInt(41);
+                                int reversedIndex = (recipe.dataa!.length - 1) - i;
+                                return
 
-                            }),
+                                  InkWell(
+                                    onTap: (){
+                                      Get.to(Recipedetail(url:images[randomNumber]  ,i:recipe.dataa![reversedIndex]));
+                                    },
+                                    child: Padding(
+                                      padding:  EdgeInsets.only(right: responsive(15, context)),
+                                      child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
+                                    ),
+                                  );
+
+                              }),
+                        ),
                       ),
                     ),
 

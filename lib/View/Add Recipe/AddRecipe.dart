@@ -15,6 +15,7 @@ import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/View/Home/View/Home.dart';
 
 import '../../Globle Controllers/controller.dart';
+import '../../Globle Controllers/userdataclass.dart';
 import '../../Responsive/Responsiveclass.dart';
 import '../Widgets/CustomAddTextField.dart';
 import '../Widgets/CustomButton.dart';
@@ -100,8 +101,8 @@ class _AddrecipeState extends State<Addrecipe> {
     print('path is ${imgpath}');
     return Scaffold(
         body: SafeArea(
-            child: Consumer<FoodDBProvider>(
-                builder: (context, recipe, child) {
+            child: Consumer2<FoodDBProvider,UserDataController>(
+                builder: (context, recipe,user, child) {
                 return Stack(
       children: [
         SingleChildScrollView(
@@ -507,6 +508,7 @@ class _AddrecipeState extends State<Addrecipe> {
                     await _uploadImage();
                    await  uploadDataToFirestore({
                       "Name": "Christmas pie",
+                      "email": FirebaseAuth.instance.currentUser!.email,
                       "url": "$downloadUrl",
                       "timetaken": "20Mins",
                       "Description": "Combine a few key Christmas flavours here to make a pie that both children and adults will adore",
@@ -515,11 +517,13 @@ class _AddrecipeState extends State<Addrecipe> {
                       "Method": proceduressvalues,
                      "time":DateTime.now().toString(),
                     });
+
+                    await recipe.fetchDataFromFirestore();
+                   await  user.fetchCurrentUSerPostFromFirestore();
                     isLoading = false;
                     setState(() {
 
                     });
-                    await recipe.fetchDataFromFirestore();
                     Get.back();
                   },
                 ),

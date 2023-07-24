@@ -90,6 +90,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                     'images/dummydish.svg',
                                   fit: BoxFit.fitWidth,
                                 ),
+
                                 imageUrl: '${widget.url}',
                                 width: responsive(410, context),
                                 // replace with the URL of your image
@@ -161,7 +162,7 @@ class _RecipedetailState extends State<Recipedetail> {
                             width: responsive(250, context),
                             child: HeadingText(
                               center: false,
-                              text: '${recipe!.dataa![widget.i].name}',
+                              text: '${widget.i.name}',
                               context: context,
                               color: Colors.black
                             ),
@@ -209,7 +210,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                   children: [
                                     HeadingText(
                                       center: false,
-                                      text: '${recipe.dataa![widget.i].author!}',
+                                      text: '${widget.i.author!}',
                                       context: context,
                                       color: Colors.black
                                     ),
@@ -324,7 +325,7 @@ class _RecipedetailState extends State<Recipedetail> {
                             physics: NeverScrollableScrollPhysics(),
                             primary: true,
                             shrinkWrap: true,
-                            itemCount: recipe.dataa![widget.i].method!.length,
+                            itemCount: widget.i.method!.length,
                             itemBuilder: (context,i){
                               return    Padding(
                                   padding:  EdgeInsets.fromLTRB(0, responsive(5, context), 0, responsive(10, context)),
@@ -353,7 +354,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                               center: false,
                                                 color:Color.fromRGBO(169, 169, 169, 1).withOpacity(0.6),
                                                 context: context,
-                                                text: '${recipe.dataa![widget.i].method![i]}'
+                                                text: '${widget.i.method![i]}'
 
                                             ),
                                           ),
@@ -372,7 +373,7 @@ class _RecipedetailState extends State<Recipedetail> {
                           physics: NeverScrollableScrollPhysics(),
                             primary: true,
                           shrinkWrap: true,
-                            itemCount: recipe.dataa![widget.i].ingredients!.length,
+                            itemCount: widget.i.ingredients!.length,
                             itemBuilder: (context,i){
                             // var data = recipe.dataa![widget.i].ingredients![i];
 
@@ -385,7 +386,7 @@ class _RecipedetailState extends State<Recipedetail> {
                           return    Padding(
                               padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                               child:
-                              ListNew(context, '${recipe.dataa![widget.i].ingredients![i]}', '500g', 'images/ingri.jpg')
+                              ListNew(context, '${widget.i.ingredients![i]}', '500g', 'images/ingri.jpg')
                           );
                         }),
                       ),

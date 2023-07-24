@@ -15,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
+import 'package:recipeapp/View/RecipeDetail/RecipeDetail.dart';
 
 import '../../Globle Controllers/userdataclass.dart';
 import '../Home/View/Home.dart';
@@ -56,7 +57,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
   //FirebaseAuth.instance.signOut();
-    print('email is : ${FirebaseAuth.instance.currentUser?.email}');
+  //   print('email is : ${FirebaseAuth.instance.currentUser?.email}');
     return Scaffold(
 
       body: Padding(
@@ -67,6 +68,11 @@ class _ProfileState extends State<Profile> {
               builder: (context, UserData, child) {
                 if(UserData.UserData == null){
                   UserData.fetchDataFromFirestore();
+                }
+                if(FirebaseAuth.instance.currentUser != null){
+                  if(UserData.UserPostData.isEmpty)
+                  UserData.fetchCurrentUSerPostFromFirestore();
+                  print('data detch');
                 }
 
               return Container(
@@ -94,6 +100,9 @@ class _ProfileState extends State<Profile> {
                                 onTap: () async {
                                  await FirebaseAuth.instance.signOut().then((value) {
                                    Get.to(MainPage());
+                                   setState(() {
+
+                                   });
                                  });
                                 },
                                 child: SvgPicture.asset(
@@ -205,7 +214,7 @@ class _ProfileState extends State<Profile> {
                                       Padding(
                                         padding:  EdgeInsets.fromLTRB(0, responsive(8, context), 0, 0),
                                         child: HeadingText(
-                                            text: '4',
+                                            text: '${UserData.UserPostData.length??"0"}',
                                             context: context,
                                             center: false
                                         ),
@@ -342,112 +351,134 @@ class _ProfileState extends State<Profile> {
                             ),
 
                           ),
+                          // if(FirebaseAuth.instance.currentUser!.email == UserData.UserData!.email)
+                         Center(
+                           child: UserData.UserPostData.isEmpty?Padding(
+                             padding:  EdgeInsets.only(top: responsive(100, context)),
+                             child: Container(
+                               height: responsive(50, context),
+                               width: responsive(50,context),
+                               child: CircularProgressIndicator(
+                                 color: Colors.teal,
+                               ),
+                             ),
+                           ) :
+                           ListView.builder(
+                               physics: NeverScrollableScrollPhysics(),
+                               primary: true,
+                               shrinkWrap: true,
+                               itemCount: UserData.UserPostData.length,
+                               // itemCount: UserData.UserPostData!.i.method!.length,
+                               itemBuilder: (context,i){
 
-                          ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              primary: true,
-                              shrinkWrap: true,
-                              itemCount: 5,
-                              itemBuilder: (context,i){
-                                return   Padding(
-                                  padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(15, context), responsive(10, context), 0),
-                                  child:
-                                  Container(
-                                    height: responsive(150, context),
-                                    // width: responsive(350, context),
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('images/background.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding:  EdgeInsets.only(right: responsive(10, context),top:responsive(10, context) ),
-                                          child: RecipeBadge(context, '4.5'),
-                                        ),
-
-
-
-                                        Padding(
-                                          padding:  EdgeInsets.only(right: responsive(1, context),top:responsive(0, context) ),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(40, context),0, 0),
-                                                child: MediumText(
-                                                    center: false,
-                                                    context: context,
-                                                    color: Colors.white,
-                                                    text: 'Traditional spare ribs\nbaked'
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                                                children: [
-                                                  Padding(
-                                                    padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, 0, 0),
-                                                    child: smallText(
-                                                        center: false,
-                                                        context: context,
-                                                        text: 'By Chef John',
-                                                        color: Color(0xFFD9D9D9)
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    child: Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:  EdgeInsets.only(left: responsive(10, context)),
-                                                          child: SvgPicture.asset(
-                                                            'images/timer.svg',
-                                                            height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                            width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                          ),
-                                                        ),
-
-                                                        Padding(
-                                                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                                          child: normalText(
-                                                              color: Colors.white,
-                                                              context: context,
-                                                              text: '20 min'
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:  EdgeInsets.only(right: responsive(10, context),left: responsive(10, context)),
-                                                          child: CircleAvatar(
-                                                            radius: responsiveDesign(11/2, context)+ responsiveHeight(11/2, context),
-                                                            backgroundColor: Colors.white,
-                                                            child: SvgPicture.asset(
-                                                              'images/save.svg',
-                                                              height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                              width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
+                                 return InkWell(
+                                   onTap: (){
+                                     Get.to(Recipedetail(i: UserData.UserPostData[i],url: UserData.UserPostData[i].url,));
+                                   },
+                                   child: Padding(
+                                     padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(15, context), responsive(10, context), 0),
+                                     child:
+                                     Container(
+                                       height: responsive(150, context),
+                                       // width: responsive(350, context),
+                                       decoration: BoxDecoration(
+                                         image: DecorationImage(
+                                           image:
+                                           // AssetImage('images/background.png'),
+                                           NetworkImage('${UserData.UserPostData![i].url}'),
+                                           fit: BoxFit.cover,
+                                         ),
+                                         borderRadius: BorderRadius.circular(10),
+                                       ),
+                                       child: Column(
+                                         crossAxisAlignment: CrossAxisAlignment.end,
+                                         children: [
+                                           Padding(
+                                             padding:  EdgeInsets.only(right: responsive(10, context),top:responsive(10, context) ),
+                                             child: RecipeBadge(context, '4.5'),
+                                           ),
 
 
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+
+                                           Padding(
+                                             padding:  EdgeInsets.only(right: responsive(1, context),top:responsive(0, context) ),
+                                             child: Column(
+                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                               children: [
+                                                 Padding(
+                                                   padding:  EdgeInsets.fromLTRB(responsive(10, context), responsive(40, context),0, 0),
+                                                   child: MediumText(
+                                                       center: false,
+                                                       context: context,
+                                                       color: Colors.white,
+                                                       text: 'Traditional spare ribs\nbaked'
+                                                   ),
+                                                 ),
+                                                 Row(
+                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                                                   children: [
+                                                     Padding(
+                                                       padding:  EdgeInsets.fromLTRB(responsive(10, context), 0, 0, 0),
+                                                       child: smallText(
+                                                           center: false,
+                                                           context: context,
+                                                           text: 'By Chef John',
+                                                           color: Color(0xFFD9D9D9)
+                                                       ),
+                                                     ),
+                                                     Container(
+                                                       child: Row(
+                                                         children: [
+                                                           Padding(
+                                                             padding:  EdgeInsets.only(left: responsive(10, context)),
+                                                             child: SvgPicture.asset(
+                                                               'images/timer.svg',
+                                                               height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                               width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                             ),
+                                                           ),
+
+                                                           Padding(
+                                                             padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                                             child: normalText(
+                                                                 color: Colors.white,
+                                                                 context: context,
+                                                                 text: '20 min'
+                                                             ),
+                                                           ),
+                                                           Padding(
+                                                             padding:  EdgeInsets.only(right: responsive(10, context),left: responsive(10, context)),
+                                                             child: CircleAvatar(
+                                                               radius: responsiveDesign(11/2, context)+ responsiveHeight(11/2, context),
+                                                               backgroundColor: Colors.white,
+                                                               child: SvgPicture.asset(
+                                                                 'images/save.svg',
+                                                                 height: responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                                 width:  responsiveDesign(16/2, context)+ responsiveHeight(16/2, context),
+                                                               ),
+                                                             ),
+                                                           )
+                                                         ],
+                                                       ),
+                                                     )
 
 
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
+                                                   ],
+                                                 ),
+                                               ],
+                                             ),
+                                           ),
+
+
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                 );
+                               }) ,
+                         )
+
 
 
 

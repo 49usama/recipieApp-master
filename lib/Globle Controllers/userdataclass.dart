@@ -9,10 +9,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../Global Models/Model.dart';
 import '../Global Models/UserModel.dart';
 
 class UserDataController extends ChangeNotifier{
   UserModel? UserData;
+  List<recipesDB> UserPostData = [];
   File? _imageFile;
   var isLoading = false;
   String _uploadedImageUrl='';
@@ -95,5 +97,35 @@ class UserDataController extends ChangeNotifier{
     notifyListeners();
 
   }
+
+
+  Future<void> fetchCurrentUSerPostFromFirestore() async {
+
+
+    try {
+      UserPostData.clear();
+
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('Recipes').where('email', isEqualTo:FirebaseAuth.instance.currentUser!.email)
+          .get();
+      querySnapshot.docs.reversed.forEach((document) async {
+        // print("data = ${document.data()}");
+        var map = document.data();
+        if(FirebaseAuth.instance.currentUser!.email == document["email"])
+
+          UserPostData.add(recipesDB.fromJson(map as Map<String, dynamic>));
+
+      });
+      print("length is :${UserPostData.length}");
+
+      print("User email is equal to Current user email");
+    } catch (e) {
+      print("Error fetching data from Firestore: $e");
+    }
+
+    notifyListeners();
+
+  }
+
+
 
 }
