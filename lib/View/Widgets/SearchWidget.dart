@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:recipeapp/Global%20Styles/AppFonts.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
-Widget Search(context){
+import '../../Global Models/Model.dart';
+
+Widget  Search(BuildContext context,var onchange){
   return Container(
     width: responsiveDesign(280, context),
     height: responsive(50, context),
@@ -18,6 +20,7 @@ Widget Search(context){
     child: Center(
       child:
           TextField(
+            onChanged:onchange,
             style: TextStyle(
 
               // color: Colors.black45.withOpacity(0.4),

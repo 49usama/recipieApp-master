@@ -24,7 +24,7 @@ import '../../Widgets/CustomTabs.dart';
 import '../../Widgets/NewRecipeWidget.dart';
 import '../../Widgets/SearchWidget.dart';
 import '../../authentication/Login.dart';
-
+import '/../../Global Models/Model.dart';
 //final List<String> tabs = ['All', 'Indian', 'Italian','Asian','Chinese','Fruit','Vegitables','Protien','Cereal','Local Dishes',];
 final List<String> _svgIcons = [
   'images/home.svg',
@@ -109,6 +109,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var searchKeyword="";
   @override
   Widget build(BuildContext context) {
     return     Consumer2<UserDataController,FoodDBProvider>(
@@ -179,7 +180,13 @@ class _HomeState extends State<Home> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Search(context),
+                        Search(context,
+                            (value){
+                          setState(() {
+                            searchKeyword = value;
+                          });
+                            }
+                        ),
                         SvgPicture.asset('images/Filter.svg',
                           width: responsive(50, context),
                           height: responsive(50, context),),
@@ -233,12 +240,16 @@ class _HomeState extends State<Home> {
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemCount: //10,
-                          recipe.dataa!.length,
+                          recipesDB.searchByName(recipe.dataa!, searchKeyword).length,
 
                           itemBuilder: (context,i){
 
                             // Generate a random number between 0 and 40 (inclusive)
                             int randomNumber = random.nextInt(41);
+
+                            final filteredRecipes =
+                            recipesDB.searchByName(recipe.dataa!, searchKeyword);
+                            final res = filteredRecipes[i];
                             return
                               // Cat[selected]=="All"?
                               InkWell(
@@ -247,7 +258,7 @@ class _HomeState extends State<Home> {
                                 },
                                 child: Padding(
                                   padding:  EdgeInsets.only(right: responsive(15, context)),
-                                  child: TrendingRecipe(url: recipe.dataa![i].url,name:  recipe.dataa![i].name,),
+                                  child: TrendingRecipe(url: recipe.dataa![i].url,name:  res.name,),
                                 ),);
                             //   ):Cat[selected]==recipe.dataa!.meals![i].strCategory? InkWell(
                             //   onTap: (){

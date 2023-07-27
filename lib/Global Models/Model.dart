@@ -37,4 +37,12 @@ class recipesDB {
     data['Method'] = this.method;
     return data;
   }
+
+
+
+  static List<recipesDB> searchByName(List<recipesDB> recipes, String keyword) {
+    return recipes
+        .where((recipe) => recipe.name.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+  }
 }
