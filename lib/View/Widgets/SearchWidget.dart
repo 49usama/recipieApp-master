@@ -20,7 +20,7 @@ Widget  Search(BuildContext context,var onchange){
     child: Center(
       child:
           TextField(
-            onChanged:onchange,
+            onSubmitted: onchange,
             style: TextStyle(
 
               // color: Colors.black45.withOpacity(0.4),

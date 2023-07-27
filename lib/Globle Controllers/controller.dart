@@ -12,6 +12,13 @@ class FoodDBProvider  extends ChangeNotifier {
 
   List<recipesDB> dataa=[];
   List<dynamic> _jsonData = [];
+  var searchKeyword="";
+
+
+  void UpdatingSearch(value){
+    searchKeyword = value;
+    notifyListeners();
+  }
 
   List<dynamic> get jsonData => _jsonData;
 
