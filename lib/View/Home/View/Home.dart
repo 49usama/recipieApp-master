@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 import 'package:recipeapp/View/Saved%20Recipies/SavedRecipies.dart';
@@ -37,6 +38,7 @@ var selected=0;
 // Create an instance of the Random class
 final random = Random();
 class MainPage extends StatefulWidget {
+
   const MainPage({Key? key}) : super(key: key);
 
   @override
@@ -46,7 +48,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
 
-
+   late BannerAd _bannerAd;
+   bool _isAdLoaded = false;
 
   var selected=0;
   int _selectedIndex = 0;
@@ -58,6 +61,33 @@ class _MainPageState extends State<MainPage> {
 
 
   ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initBannerAd();
+  }
+
+  _initBannerAd(){
+    _bannerAd = BannerAd(
+        size: AdSize.banner,
+        adUnitId: 'ca-app-pub-3318335602971388/4924295364',
+        listener: BannerAdListener(
+          onAdLoaded:(ad){
+            setState(() {
+              _isAdLoaded = true;
+
+            });
+          },
+          onAdFailedToLoad: (ad,error){}
+        ),
+        request: AdRequest(),
+    );
+
+    _bannerAd.load();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -75,7 +105,11 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: CurvedNavigationBar(
+          bottomNavigationBar: _isAdLoaded?Container(
+            height: _bannerAd.size.height.toDouble(),
+            width: _bannerAd.size.width.toDouble(),
+            child:AdWidget(ad: _bannerAd,),
+          ):CurvedNavigationBar(
 
             selectedIndex: _selectedIndex,
             items: _svgIcons.map((iconPath) {
