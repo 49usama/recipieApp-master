@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import com.google.android.gms.ads.MobileAds;
+// import 'package:google.android.gms.ads.initialization.InitializationStatus';
 import 'package:provider/provider.dart';
 import 'package:recipeapp/View/Home/View/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +19,7 @@ var prefs;
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+   MobileAds.instance.initialize();
   await Firebase.initializeApp();
   prefs = await SharedPreferences.getInstance();
 

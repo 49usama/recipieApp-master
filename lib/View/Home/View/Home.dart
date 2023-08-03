@@ -71,17 +71,20 @@ class _MainPageState extends State<MainPage> {
   _initBannerAd(){
     _bannerAd = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-3318335602971388/4924295364',
+        adUnitId: 'ca-app-pub-1678002206864752/9758438196',
         listener: BannerAdListener(
           onAdLoaded:(ad){
             setState(() {
+              print('add is on');
               _isAdLoaded = true;
 
             });
           },
           onAdFailedToLoad: (ad,error){}
         ),
-        request: AdRequest(),
+        request: AdRequest(
+
+        ),
     );
 
     _bannerAd.load();
@@ -90,6 +93,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    _initBannerAd();
     return SafeArea(
         child:Scaffold(
           // backgroundColor: Colors.white60,
