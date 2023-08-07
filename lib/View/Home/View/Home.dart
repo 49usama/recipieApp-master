@@ -16,6 +16,8 @@ import 'package:recipeapp/utils/utils.dart';
 import '../../../Global Styles/TextFiles.dart';
 import '../../../Globle Controllers/controller.dart';
 import '../../../Globle Controllers/userdataclass.dart';
+import '../../../constant/const.dart';
+import '../../../services/admobservice.dart';
 import '../../Add Recipe/AddRecipe.dart';
 import '../../Notifications/Notifications.dart';
 import '../../Profile/Profile.dart';
@@ -48,8 +50,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
 
 
-   late BannerAd _bannerAd;
-   bool _isAdLoaded = false;
+
 
   var selected=0;
   int _selectedIndex = 0;
@@ -61,39 +62,14 @@ class _MainPageState extends State<MainPage> {
 
 
   ];
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _initBannerAd();
-  }
 
-  _initBannerAd(){
-    _bannerAd = BannerAd(
-        size: AdSize.banner,
-        adUnitId: 'ca-app-pub-1678002206864752/9758438196',
-        listener: BannerAdListener(
-          onAdLoaded:(ad){
-            setState(() {
-              print('add is on');
-              _isAdLoaded = true;
 
-            });
-          },
-          onAdFailedToLoad: (ad,error){}
-        ),
-        request: AdRequest(
 
-        ),
-    );
-
-    _bannerAd.load();
-  }
 
 
   @override
   Widget build(BuildContext context) {
-    _initBannerAd();
+
     return SafeArea(
         child:Scaffold(
           // backgroundColor: Colors.white60,
@@ -109,11 +85,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          bottomNavigationBar: _isAdLoaded?Container(
-            height: _bannerAd.size.height.toDouble(),
-            width: _bannerAd.size.width.toDouble(),
-            child:AdWidget(ad: _bannerAd,),
-          ):CurvedNavigationBar(
+          bottomNavigationBar: CurvedNavigationBar(
 
             selectedIndex: _selectedIndex,
             items: _svgIcons.map((iconPath) {
@@ -148,8 +120,28 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  //
+  // void setTestDevices() {
+  //   List<String> testDevices = ["d7afbe19-7433-48b0-8e04-41d9ffe014a8"];
+  //   MobileAds.instance.updateRequestConfiguration(
+  //     RequestConfiguration(testDeviceIds: testDevices),
+  //   );
+  // }
+
 
   recipesDB? res;
+  @override
+  void initState() {
+    //setTestDevices();
+
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  var addindex ;
+  var search="";
+
   @override
   Widget build(BuildContext context) {
     return     Consumer2<UserDataController,FoodDBProvider>(
@@ -159,6 +151,12 @@ class _HomeState extends State<Home> {
           if(recipe.dataa.isEmpty){
             UserData.fetchDataFromFirestore();
             recipe.fetchDataFromFirestore();
+
+
+         }
+          if(!recipe.isAdLoaded){
+
+            recipe.initBannerAdshome();
           }
           // recipe.loadJsonData();
 
@@ -178,8 +176,9 @@ class _HomeState extends State<Home> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
                             HeadingText(
-                              text: 'Hello Inam',
+                              text: 'Hello ',
                               context: context,
                             ),
                             smallText(
@@ -221,11 +220,20 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Search(context,
+
                             (value){
                           // setState(() {
-                              recipe.UpdatingSearch(value);
-                          // });
+                              search = value;
+                             recipe.UpdatingSearch(value);
+
+                            }, (value){
+                            search = value;
+                            if(search == ""){
+                              setState(() {
+                              });
                             }
+                          }
+
                         ),
                         SvgPicture.asset('images/Filter.svg',
                           width: responsive(50, context),
@@ -234,36 +242,36 @@ class _HomeState extends State<Home> {
                       ],
                     ),
 
-                  recipe.searchKeyword==""?Column(
+                    search ==""?Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          child: Padding(
-                            padding:  EdgeInsets.only(top: responsiveHeight(20, context)),
-                            child: Row(
-                              children: [
-                                for (int i = 0; i < Cat.length; i++)
-                                  InkWell(
-                                    onTap: (){
-                                      selected = i;
-                                      setState(() {
-
-                                      });
-                                    },
-
-                                    child: CustomTab(
-                                      text: Cat[i],
-                                      isSelected: i == selected, // Set isSelected to true for the initially selected tab
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // SingleChildScrollView(
+                        //   physics: BouncingScrollPhysics(),
+                        //   scrollDirection: Axis.horizontal,
+                        //   child: Padding(
+                        //     padding:  EdgeInsets.only(top: responsiveHeight(20, context)),
+                        //     child: Row(
+                        //       children: [
+                        //         for (int i = 0; i < dish_names.length; i++)
+                        //           InkWell(
+                        //             onTap: (){
+                        //               selected = i;
+                        //               setState(() {
+                        //
+                        //               });
+                        //             },
+                        //
+                        //             child: CustomTab(
+                        //               text:  dish_names[i],
+                        //               isSelected: i == selected, // Set isSelected to true for the initially selected tab
+                        //             ),
+                        //           ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                         SizedBox(
-                          height: responsiveHeight(40, context),
+                          height: responsiveHeight(60, context),
                         ),
                         Center(
                             child: recipe.dataa.isEmpty?Padding(
@@ -284,25 +292,93 @@ class _HomeState extends State<Home> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemCount: //10,
-                                 recipe.dataa!.length,
+                              recipe.dataa!.length,
 
                                   itemBuilder: (context,i){
 
+ //var a = recipe.dataa![i].name.contains(dish_names[selected]);
+
+ // dish_names[selected].contains(
+ //     recipe.dataa![i].name);
+// print('Contains a = $a');
                                     // Generate a random number between 0 and 40 (inclusive)
                                     int randomNumber = random.nextInt(41);
 
 
                                     return
-                                      // Cat[selected]=="All"?
-                                      InkWell(
-                                        onTap: (){
-                                          Get.to(Recipedetail(url:recipe.dataa![i].url  ,i:recipe.dataa![i]));
+
+
+
+                                      recipe.isAdLoaded && i%5==0  && i ~/ 5 < recipe.bannerAd.length
+                                        ?
+                                      SizedBox(
+                                        height:recipe.bannerAd[0].size.height.toDouble(),
+                                        width: recipe.bannerAd[0].size.width.toDouble(),
+                                        child: AdWidget(ad: recipe.bannerAd[i ~/ 5 ]), // Use a different BannerAd instance
+                                      ):
+
+                                    // Cat[selected]=="All"?
+                                      recipe.dataa![i].name.toLowerCase().contains(dish_names[selected].toLowerCase())
+                                                      ? InkWell(
+                                                          onTap: () {
+                                                            Get.to(Recipedetail(
+                                                                url: recipe
+                                                                    .dataa![i]
+                                                                    .url,
+                                                                i: recipe
+                                                                        .dataa![
+                                                                    i]));
+                                                          },
+                                                          child: Padding(
+                                                            padding: EdgeInsets.only(
+                                                                right: responsive(
+                                                                    15,
+                                                                    context)),
+                                                            child:
+                                                                TrendingRecipe(
+                                                              url: recipe
+                                                                  .dataa![i]
+                                                                  .url,
+                                                              name: recipe
+                                                                  .dataa![i]
+                                                                  .name,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : dish_names[selected] ==
+                                                              'All'
+                                                          ? InkWell(
+                                        onTap: () {
+                                          Get.to(Recipedetail(
+                                              url: recipe
+                                                  .dataa![
+                                              i]
+                                                  .url,
+                                              i: recipe
+                                                  .dataa![
+                                              i]));
                                         },
                                         child: Padding(
-                                          padding:  EdgeInsets.only(right: responsive(15, context)),
-                                          child: TrendingRecipe(url: recipe.dataa![i].url,name: recipe.dataa![i].name,),
-                                        ),);
-                                    //   ):Cat[selected]==recipe.dataa!.meals![i].strCategory? InkWell(
+                                          padding: EdgeInsets.only(
+                                              right: responsive(
+                                                  15,
+                                                  context)),
+                                          child:
+                                          TrendingRecipe(
+                                            url: recipe
+                                                .dataa![i]
+                                                .url,
+                                            name: recipe
+                                                .dataa![i]
+                                                .name,
+                                          ),
+                                        ),
+                                      )
+                                                          : Container();
+
+
+
+                                              //   ):Cat[selected]==recipe.dataa!.meals![i].strCategory? InkWell(
                                     //   onTap: (){
                                     //     Get.to(Recipedetail(url:images[randomNumber] ,i:i));
                                     //   },

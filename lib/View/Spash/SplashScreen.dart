@@ -9,8 +9,15 @@ import '../../Responsive/Responsiveclass.dart';
 import '../Home/View/Home.dart';
 import '../authentication/Login.dart';
 
-class Splash extends StatelessWidget {
-  const Splash({Key? key}) : super(key: key);
+class Splash extends StatefulWidget {
+   Splash({Key? key}) : super(key: key);
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,13 +65,41 @@ class Splash extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
+                    isLoading=true;
+                    setState(() {
+
+                    });
+
+                    // isLoading=false;
                     Get.to(MainPage());
                     // Get.to(Login());
                   },
                   child: Padding(
                     padding:
                         EdgeInsets.only(top: responsiveHeight(120, context)),
-                    child: normalButton(
+                    child: isLoading == true?Container(
+                      width: responsive(192, context),
+                      height: responsive(55, context),
+                      // padding: const EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                      decoration: ShapeDecoration(
+                        color: Color(0xFF119475),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: Center(
+                        child: Container(
+                          height: responsive(20, context),
+                          width: responsive(20, context),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 0.9,
+
+                          ),
+
+                        ),
+                      ),
+                    ): normalButton(
                       context,
                       "Start Coaking",
                       Colors.white,

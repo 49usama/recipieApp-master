@@ -28,6 +28,7 @@ class Addrecipe extends StatefulWidget {
 }
 
 class _AddrecipeState extends State<Addrecipe> {
+  var name,auther,time;
   List<Widget> ingredients = [];
   List<Widget> procedures = [];
   bool isLoading = false;
@@ -157,6 +158,9 @@ class _AddrecipeState extends State<Addrecipe> {
                                               height: responsive(55, context),
                                               width: responsive(200, context),
                                               hintText: 'Name',
+                                              onchange: (value){
+                                                name=value;
+                                              },
                                             ),
                                             Padding(
                                               padding: EdgeInsets.fromLTRB(
@@ -164,7 +168,12 @@ class _AddrecipeState extends State<Addrecipe> {
                                               child: MyCustomTextField(
                                                   height: responsive(55, context),
                                                   width: responsive(200, context),
-                                                  hintText: 'Time Taken'),
+                                                  hintText: 'Time Taken',
+                                                onchange: (value){
+                                                    time = value;
+                                                },
+
+                                              ),
                                             )
                                           ],
                                         ),
@@ -195,6 +204,10 @@ class _AddrecipeState extends State<Addrecipe> {
                                             height: responsive(55, context),
                                             width: responsive(200, context),
                                             hintText: ' chef name ',
+                                            onchange: (value){
+                                              auther = value;
+
+                                            },
                                           ),
                                           CustomButton(
                                             text: 'Pick Image',
@@ -507,12 +520,12 @@ class _AddrecipeState extends State<Addrecipe> {
                     });
                     await _uploadImage();
                    await  uploadDataToFirestore({
-                      "Name": "Christmas pie",
+                      "Name": "$name",
                       "email": FirebaseAuth.instance.currentUser!.email,
                       "url": "$downloadUrl",
-                      "timetaken": "20Mins",
+                      "timetaken": "$time",
                       "Description": "Combine a few key Christmas flavours here to make a pie that both children and adults will adore",
-                      "Author": "Mary Cadogan",
+                      "Author": "$auther",
                       "Ingredients": ingredientsvalues,
                       "Method": proceduressvalues,
                      "time":DateTime.now().toString(),

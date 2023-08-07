@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:recipeapp/View/authentication/firebase_auth.dart';
@@ -18,6 +19,7 @@ class _SignupState extends State<Signup> {
 
   bool _isChecked = false;
   var name,email,password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -163,15 +165,29 @@ class _SignupState extends State<Signup> {
                       padding:  EdgeInsets.fromLTRB(responsive(0, context), responsive(80, context), 0, responsive(0, context)),
                       child: InkWell(
                         onTap: () async {
+                          // isLoading=true;
+                          // setState(() {
+                          //
+                          // });
+                          if(email.contain("@gmail.com")&&name!=null&&password!=null){
+                            await FirebaseServices.signUp(name, email, password);
+                          }else if(email.contain("@gmail.com")){
+                            print('usami tha salery milao shla');
+
+                          }else{
+                            print('usami tha salery milao shla');
+                            // Get.snackbar('Error', "Please enter valid email address or pass");
+                            Fluttertoast.showToast(msg: " Please enter valid email :) ");
+                          }
                           
-                         await FirebaseServices.signUp(name, email, password);
+
                          Get.back();
 
                           
                           
                           
                         },
-                        child: Container(
+                        child:  Container(
                           width: responsive(400, context),
                           height: responsive(60, context),
                           // padding: const EdgeInsets.symmetric(horizontal: 85, vertical: 18),
@@ -182,7 +198,29 @@ class _SignupState extends State<Signup> {
                             ),
                           ),
                           child: Center(
-                            child: Container(
+                            child:isLoading == true?Container(
+                              width: responsive(192, context),
+                              height: responsive(55, context),
+                              // padding: const EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                              decoration: ShapeDecoration(
+                                color: Color(0xFF119475),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Center(
+                                child: Container(
+                                  height: responsive(20, context),
+                                  width: responsive(20, context),
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 0.9,
+
+                                  ),
+
+                                ),
+                              ),
+                            ): Container(
                               child: normalText(
                                   center: true,
                                   color: Colors.white,

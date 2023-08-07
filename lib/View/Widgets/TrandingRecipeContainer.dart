@@ -11,7 +11,7 @@ class TrendingRecipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     height:responsive(200, context),
+     height:responsive(240, context),
       width: responsiveDesign(160/2, context)+ responsiveHeight(160/2, context),
       child: Stack(
         alignment: Alignment.topCenter,
@@ -20,7 +20,7 @@ class TrendingRecipe extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Container(
               width: responsive(170, context),
-              height: responsive(180, context),
+              height: responsive(200, context),
               decoration: ShapeDecoration(
                 color: Color(0xFFD9D9D9).withOpacity(0.4),
                 shape: RoundedRectangleBorder(

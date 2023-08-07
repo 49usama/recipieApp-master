@@ -1,3 +1,4 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ var prefs;
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+  // FirebaseAdMob.instance.initialize(appId: 'ca-app-pub-1678002206864752~3953461648');
    MobileAds.instance.initialize();
   await Firebase.initializeApp();
   prefs = await SharedPreferences.getInstance();

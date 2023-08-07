@@ -98,7 +98,7 @@ class UserDataController extends ChangeNotifier{
 
   }
 
-
+var iscalled = false;
   Future<void> fetchCurrentUSerPostFromFirestore() async {
 
 
@@ -115,6 +115,7 @@ class UserDataController extends ChangeNotifier{
           UserPostData.add(recipesDB.fromJson(map as Map<String, dynamic>));
 
       });
+      iscalled = true;
       print("length is :${UserPostData.length}");
 
       print("User email is equal to Current user email");

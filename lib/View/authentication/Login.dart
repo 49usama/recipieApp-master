@@ -22,6 +22,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 
   var email,password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +120,14 @@ class _LoginState extends State<Login> {
                   padding:  EdgeInsets.fromLTRB(responsive(0, context), responsive(80, context), 0, responsive(0, context)),
                   child: InkWell(
                     onTap: () async {
+                      isLoading = true;
+                      setState(() {
+
+                      });
                       await FirebaseServices.login(email, password).then((value) async {
 
                        await Get.to(MainPage());
+
 
                       }
                       );
@@ -137,7 +143,29 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       child: Center(
-                        child: Container(
+                        child: isLoading == true?Container(
+                          width: responsive(192, context),
+                          height: responsive(55, context),
+                          // padding: const EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                          decoration: ShapeDecoration(
+                            color: Color(0xFF119475),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: responsive(20, context),
+                              width: responsive(20, context),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 0.9,
+
+                              ),
+
+                            ),
+                          ),
+                        ):Container(
                           child: normalText(
                               center: true,
                               color: Colors.white,

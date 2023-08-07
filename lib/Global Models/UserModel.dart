@@ -1,3 +1,4 @@
+
 class UserModel {
      var email;
      var uid;
@@ -33,4 +34,10 @@ class UserModel {
       'profileimageurl':url
     };
   }
+
+
+
+
+
+
 }

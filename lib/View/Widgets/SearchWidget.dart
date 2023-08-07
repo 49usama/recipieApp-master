@@ -5,7 +5,7 @@ import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
 import '../../Global Models/Model.dart';
 
-Widget  Search(BuildContext context,var onchange){
+Widget  Search(BuildContext context,var onchange,onchan){
   return Container(
     width: responsiveDesign(280, context),
     height: responsive(50, context),
@@ -20,6 +20,7 @@ Widget  Search(BuildContext context,var onchange){
     child: Center(
       child:
           TextField(
+            onChanged: onchan,
             onSubmitted: onchange,
             style: TextStyle(
 
