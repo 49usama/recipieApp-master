@@ -50,6 +50,7 @@ class FoodDBProvider extends ChangeNotifier {
             isAdLoaded = true;
           },
           onAdFailedToLoad: (ad, error) {
+            ad.dispose();
             print("Ad failed to load because of $error");
           },
         ),
@@ -72,6 +73,7 @@ class FoodDBProvider extends ChangeNotifier {
             isiAdLoaded = true;
           },
           onAdFailedToLoad: (ad, error) {
+            ad.dispose();
             print("Ad failed to load because of $error");
           },
         ),
@@ -94,6 +96,7 @@ class FoodDBProvider extends ChangeNotifier {
             ispcAdLoaded = true;
           },
           onAdFailedToLoad: (ad, error) {
+            ad.dispose();
             print("Ad failed to load because of $error");
           },
         ),
@@ -116,6 +119,7 @@ class FoodDBProvider extends ChangeNotifier {
             ispAdLoaded = true;
           },
           onAdFailedToLoad: (ad, error) {
+            ad.dispose();
             print("Ad failed to load because of $error");
           },
         ),
@@ -129,32 +133,32 @@ class FoodDBProvider extends ChangeNotifier {
 
   //-------------------------Native  Ad--------------------------------//
 
-  late List<NativeAd> nativeAd;
-  bool isNativeAdLoaded = false;
-
-  void initNativeAd() {
-    nativeAd = List.generate(
-      50,
-      // Number of Native ads you want to display
-          (index) =>
-      NativeAd(
-        adUnitId: AdmobService.nativeAdUnitId!,
-
-        listener: NativeAdListener(
-          onAdLoaded: (ad) {
-            print('Native Ad loaded');
-            isNativeAdLoaded = true;
-          },
-          onAdFailedToLoad: (ad, error) {
-            print("Native Ad failed to load because of $error");
-            ad.dispose();
-          },
-        ),
-        request: AdRequest(),
-      )..load(),
-    );
-    notifyListeners();
-  }
+  // late List<NativeAd> nativeAd;
+  // bool isNativeAdLoaded = false;
+  //
+  // void initNativeAd() {
+  //   nativeAd = List.generate(
+  //     50,
+  //     // Number of Native ads you want to display
+  //         (index) =>
+  //     NativeAd(
+  //       adUnitId: AdmobService.nativeAdUnitId!,
+  //
+  //       listener: NativeAdListener(
+  //         onAdLoaded: (ad) {
+  //           print('Native Ad loaded');
+  //           isNativeAdLoaded = true;
+  //         },
+  //         onAdFailedToLoad: (ad, error) {
+  //           print("Native Ad failed to load because of $error");
+  //           ad.dispose();
+  //         },
+  //       ),
+  //       request: AdRequest(),
+  //     )..load(),
+  //   );
+  //   notifyListeners();
+  // }
 
 
 

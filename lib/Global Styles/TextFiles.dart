@@ -20,6 +20,7 @@ Widget  HeadingText({var center, text,context,Color? color}){
   return Text(
     '$text',
     textAlign: center == null? TextAlign.center:center!=null&&center == false?TextAlign.left:TextAlign.center,
+
     style: TextStyle(
       color: color,
       fontSize: responsiveDesign(20/2, context)+ responsiveHeight(20/2, context),

@@ -161,6 +161,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                               onchange: (value){
                                                 name=value;
                                               },
+                                              obsecure: false,
                                             ),
                                             Padding(
                                               padding: EdgeInsets.fromLTRB(
@@ -172,6 +173,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                                 onchange: (value){
                                                     time = value;
                                                 },
+                                                obsecure: false,
 
                                               ),
                                             )
@@ -208,6 +210,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                               auther = value;
 
                                             },
+                                            obsecure: false,
                                           ),
                                           CustomButton(
                                             text: 'Pick Image',
@@ -268,6 +271,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                               padding: EdgeInsets.fromLTRB(
                                                   0, responsive(0, context), 0, 0),
                                               child: MyCustomTextField(
+                                                obsecure: false,
                                                 onchange: (value) {
                                                   try{
                                                     ingredientsvalues[index]=value;
@@ -312,6 +316,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                                             0,
                                                             0),
                                                         child: MyCustomTextField(
+                                                          obsecure: false,
                                                           height:
                                                               responsive(55, context),
                                                           width:
@@ -340,6 +345,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                                   padding: EdgeInsets.fromLTRB(
                                                       0, responsive(10, context), 0, 0),
                                                   child: MyCustomTextField(
+                                                    obsecure: false,
                                                     height: responsive(55, context),
                                                     width: responsive(400, context),
                                                     hintText: 'Ingredients  ',
@@ -402,6 +408,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                                 padding: EdgeInsets.fromLTRB(
                                                     0, responsive(0, context), 0, 0),
                                                 child: MyCustomTextField(
+                                                  obsecure: false,
                                                   onchange: (value) {
 
                                                       try{
@@ -452,6 +459,7 @@ class _AddrecipeState extends State<Addrecipe> {
                                                           0,
                                                           0),
                                                       child: MyCustomTextField(
+                                                        obsecure: false,
                                                         height: responsive(55, context),
                                                         width: responsive(400, context),
                                                         hintText: 'Procedure  ',

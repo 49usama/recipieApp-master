@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.recipeapp">
+    package="com.itecwizards.recipeapp">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="recipeapp"
+        android:label="RecipeConnect"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -34,6 +34,6 @@
            <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
            <meta-data
                android:name="com.google.android.gms.ads.APPLICATION_ID"
-               android:value="ca-app-pub-3318335602971388~2231834796"/>
+               android:value="ca-app-pub-3095044998848311~5206085137"/>
     </application>
 </manifest>

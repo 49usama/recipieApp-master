@@ -68,6 +68,7 @@ class _LoginState extends State<Login> {
                   ),
 
                   MyCustomTextField(
+                    obsecure: false,
                     width:responsive(400, context),
                     height: responsive(60, context),
                     hintText: 'Enter Email',
@@ -92,6 +93,7 @@ class _LoginState extends State<Login> {
                   ),
 
                   MyCustomTextField(
+                    obsecure: true,
                     width:responsive(400, context),
                     height: responsive(60, context),
                     hintText: 'Enter Password',

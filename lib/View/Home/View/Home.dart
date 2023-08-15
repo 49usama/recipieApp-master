@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -200,12 +201,29 @@ class _HomeState extends State<Home> {
                             width: responsive(45, context),
                             height: responsive(50, context),
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
-                                fit: BoxFit.cover,
-                              ),
+                              // image: DecorationImage(
+                              //   image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
+                              //   fit: BoxFit.cover,
+                              // ),
                               color: Color(0xFFFFCE80),
                               borderRadius: BorderRadius.circular(responsive(10, context)),
+                            ),
+                            child:    ClipRRect(
+                              borderRadius: BorderRadius.all(Radius.circular(responsive(15, context))),
+                              child: CachedNetworkImage(
+                                errorWidget: (context, url, error) => Image.network(
+                                  // width: responsive(410, context),
+
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s",
+                                  fit: BoxFit.cover
+                                ),
+
+                                imageUrl: '${UserData.UserData?.url}',
+                                // width: responsive(410, context),
+                                // replace with the URL of your image
+                                fit: BoxFit.fitWidth,
+
+                              ),
                             ),
 
                           ),

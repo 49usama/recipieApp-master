@@ -8,10 +8,12 @@ class MyCustomTextField extends StatelessWidget {
   final double width;
   final double height;
   final String hintText;
+  var validator;
+  var obsecure;
 
   var onchange;
   var text;
-  MyCustomTextField({this.onchange,this.text, required this.width, required this.height, required this.hintText});
+  MyCustomTextField({required this.obsecure,this.validator,this.onchange,this.text, required this.width, required this.height, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,10 @@ class MyCustomTextField extends StatelessWidget {
         ),
       ),
       child: TextFormField(
+        obscureText: obsecure,
 
         onChanged: onchange,
+        validator: validator,
 
         initialValue: text??"",
         autofocus: false,

@@ -248,11 +248,14 @@ class _RecipedetailState extends State<Recipedetail> {
                                   padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                                   child: Column(
                                     children: [
-                                      HeadingText(
-                                        center: false,
-                                        text: '${widget.i.author!}',
-                                        context: context,
-                                        color: Colors.black
+                                      Container(
+                                        width:responsive(150,context),
+                                        child: HeadingText(
+                                          center: false,
+                                          text: '${widget.i.author!}',
+                                          context: context,
+                                          color: Colors.black
+                                        ),
                                       ),
                                       Padding(
                                         padding:  EdgeInsets.fromLTRB(responsive(3, context), 0, responsive(50, context), 0),
