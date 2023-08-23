@@ -3,7 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdmobService with ChangeNotifier {
   static String? get bannerAdUnitId {
-    return 'ca-app-pub-3095044998848311/1513573517';
+    return 'ca-app-pub-3095044998848311/4364770007';
   }
 
   static final BannerAdListener bannerAdListener = BannerAdListener(
