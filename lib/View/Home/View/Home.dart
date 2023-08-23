@@ -73,7 +73,9 @@ class _MainPageState extends State<MainPage> {
 
     return SafeArea(
         child:Scaffold(
-          // backgroundColor: Colors.white60,
+         //   resizeToAvoidBottomInset: false, // fluter 1.x
+            resizeToAvoidBottomInset: false,
+            // backgroundColor: Colors.white60,
           floatingActionButton: InkWell(
             onTap: (){
               FirebaseAuth.instance.currentUser==null?Get.to(Login()):
@@ -156,7 +158,6 @@ class _HomeState extends State<Home> {
 
          }
           if(!recipe.isAdLoaded){
-
             recipe.initBannerAdshome();
           }
           // recipe.loadJsonData();
@@ -451,7 +452,7 @@ class _HomeState extends State<Home> {
                                         },
                                         child: Padding(
                                           padding:  EdgeInsets.only(right: responsive(15, context)),
-                                          child:    NewRecipe(url:  images[randomNumber],name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
+                                          child:    NewRecipe(url:  recipe.dataa![reversedIndex].url,name:  recipe.dataa![reversedIndex].name,auther: recipe.dataa![reversedIndex].author,),
                                         ),
                                       );
 

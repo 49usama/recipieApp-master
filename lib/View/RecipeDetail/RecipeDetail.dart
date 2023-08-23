@@ -224,7 +224,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.only(top:8.0),
                           child: Container(
                             // height: 50,
                             // width: 380,
@@ -257,19 +257,19 @@ class _RecipedetailState extends State<Recipedetail> {
                                           color: Colors.black
                                         ),
                                       ),
-                                      Padding(
-                                        padding:  EdgeInsets.fromLTRB(responsive(3, context), 0, responsive(50, context), 0),
-                                        child: Row(
-                                          children: [
-                                            Icon(Icons.location_on,color: Colors.green,size: responsive(15, context),),
-                                            smallText(
-                                              color: Color.fromRGBO(169, 169, 169, 1),
-                                              context: context,
-                                              text: 'Lagos,Nigeria'
-                                            )
-                                          ],
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding:  EdgeInsets.fromLTRB(responsive(3, context), 0, responsive(50, context), 0),
+                                      //   child: Row(
+                                      //     children: [
+                                      //       Icon(Icons.location_on,color: Colors.green,size: responsive(15, context),),
+                                      //       smallText(
+                                      //         color: Color.fromRGBO(169, 169, 169, 1),
+                                      //         context: context,
+                                      //         text: 'Lagos,Nigeria'
+                                      //       )
+                                      //     ],
+                                      //   ),
+                                      // ),
 
 
 
@@ -356,7 +356,7 @@ class _RecipedetailState extends State<Recipedetail> {
                               smallText(
                                   color: Color.fromRGBO(169, 169, 169, 1),
                                   context: context,
-                                  text: '${widget.i.method!.length} items'
+                                  text: '${ Selected == 1?widget.i.method!.length:widget.i.ingredients!.length} items'
                               )
                             ],
                           ),
@@ -436,27 +436,42 @@ class _RecipedetailState extends State<Recipedetail> {
                             physics: NeverScrollableScrollPhysics(),
                             primary: true,
                             shrinkWrap: true,
-                            itemCount: widget.i.ingredients!.length + 1, // Add one extra slot for the ad
+                            itemCount:recipe.isiAdLoaded ? widget.i.ingredients!.length + (widget.i.ingredients!.length ~/ 5): widget.i.ingredients!.length , // Adjusted item count to account for ads
                             itemBuilder: (context, i) {
-                              if ( recipe.isiAdLoaded && i % 10 == 0) {
-                                // This is an ad slot position, show the banner ad here
-                                // Replace the AdWidget with the appropriate implementation for your banner ad
+                              if (recipe.isiAdLoaded && i % 6 == 0 && i != 0) {
+                                // This is an ad slot position (every 6th position except the start), show the banner ad here
                                 return SizedBox(
-                                  height:recipe.ingrBad[0].size.height.toDouble(),
+                                  height: recipe.ingrBad[0].size.height.toDouble(),
                                   width: recipe.ingrBad[0].size.width.toDouble(),
-                                  child: AdWidget(ad: recipe.ingrBad[i ~/ 5 ]),
+                                  child: AdWidget(ad: recipe.ingrBad[i ~/ 6]),
                                 );
                               } else {
                                 // This is a regular list item
-                                // Calculate the adjusted dataIndex
-                                int dataIndex = i - (i ~/ 5) - 1;
-                                if (dataIndex >= 0 && dataIndex < widget.i.ingredients!.length) {
+                                int dataIndex = i - (i ~/ 6); // Calculate the adjusted dataIndex
+
+                                if (recipe.isiAdLoaded && dataIndex >= 0 && dataIndex < widget.i.ingredients!.length) {
+                                  debugPrint('now index is ${dataIndex}');
                                   // Ensure the dataIndex is within valid bounds
                                   return Padding(
                                     padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                    child: ListNew(context, '${widget.i.ingredients![dataIndex]}', '500g', 'images/ingri.jpg'),
+                                    child: ListNew(
+                                      context,
+                                      '${widget.i.ingredients![dataIndex]}',
+                                      '500g',
+                                      'images/ingri.jpg',
+                                    ),
                                   );
-                                } else {
+                                }else if(!recipe.isiAdLoaded){
+                                  return  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                    child: ListNew(
+                                      context,
+                                      '${widget.i.ingredients![i]}',
+                                      '500g',
+                                      'images/ingri.jpg',
+                                    ),
+                                  );
+                            } else{
                                   // Return an empty container or another placeholder widget
                                   return Container();
                                 }

@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:recipeapp/Global%20Styles/TextFiles.dart';
 import 'package:recipeapp/Responsive/Responsiveclass.dart';
 
@@ -111,7 +113,20 @@ class NewRecipe extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Color(0xFFD9D9D9),
                 radius: responsive(40, context),
-                backgroundImage:NetworkImage('$url'),
+                child: ClipOval(
+                  child: CachedNetworkImage(
+                    errorWidget: (context, url, error) => SvgPicture.asset(
+                        width: 100,
+                        height: 100,
+                        'images/dummydish.svg'
+                    ),
+                    imageUrl: '$url',
+                    // replace with the URL of your image
+                    fit: BoxFit.cover,
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
               ),
             ),
           ),

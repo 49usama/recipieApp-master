@@ -71,7 +71,7 @@ class _SplashState extends State<Splash> {
                     });
 
                     // isLoading=false;
-                    Get.to(MainPage());
+                    Get.offAll(MainPage());
                     // Get.to(Login());
                   },
                   child: Padding(
