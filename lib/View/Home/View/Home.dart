@@ -206,7 +206,7 @@ class _HomeState extends State<Home> {
                               //   image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxsR8Th9DhpNwI1Gsj2fyL8eHJgrY-kVEYWQ50040j&s"),
                               //   fit: BoxFit.cover,
                               // ),
-                              color: Color(0xFFFFCE80),
+                              color: Color(0xFFFFCE80).withOpacity(0),
                               borderRadius: BorderRadius.circular(responsive(10, context)),
                             ),
                             child:    ClipRRect(
@@ -254,9 +254,9 @@ class _HomeState extends State<Home> {
                           }
 
                         ),
-                        SvgPicture.asset('images/Filter.svg',
-                          width: responsive(50, context),
-                          height: responsive(50, context),),
+                        // SvgPicture.asset('images/Filter.svg',
+                        //   width: responsive(50, context),
+                        //   height: responsive(50, context),),
 
                       ],
                     ),
@@ -448,7 +448,7 @@ class _HomeState extends State<Home> {
 
                                       InkWell(
                                         onTap: (){
-                                          Get.to(Recipedetail(url:images[randomNumber]  ,i:recipe.dataa![reversedIndex]));
+                                          Get.to(Recipedetail(url:images[reversedIndex]  ,i:recipe.dataa![reversedIndex]));
                                         },
                                         child: Padding(
                                           padding:  EdgeInsets.only(right: responsive(15, context)),

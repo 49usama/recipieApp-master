@@ -85,7 +85,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         Padding(
                           padding:  EdgeInsets.symmetric(vertical: responsive(20, context)),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                                InkWell(
                                    onTap: (){
@@ -93,12 +93,12 @@ class _RecipedetailState extends State<Recipedetail> {
                                      Get.back();
                                    },
                                    child: Icon(Icons.arrow_back)),
-
-                              SvgPicture.asset(
-                                'images/more.svg',
-                                height: responsiveDesign(25/2, context)+ responsiveHeight(16/2, context),
-                                width:  responsiveDesign(25/2, context)+ responsiveHeight(16/2, context),
-                              )
+                              //
+                              // SvgPicture.asset(
+                              //   'images/more.svg',
+                              //   height: responsiveDesign(25/2, context)+ responsiveHeight(16/2, context),
+                              //   width:  responsiveDesign(25/2, context)+ responsiveHeight(16/2, context),
+                              // )
                             ],
                           ),
                         ),
@@ -208,17 +208,17 @@ class _RecipedetailState extends State<Recipedetail> {
                               ),
                             ),
 
-                            Padding(
-                              padding:  EdgeInsets.fromLTRB(responsive(8, context), 0, 0, responsive(25, context)),
-                              child: Container(
-                                child: normalText(
-                                  color:Color.fromRGBO(169, 169, 169, 1),
-                                  context: context,
-                                  text: '(13K Reviews)'
-
-                                ),
-                              ),
-                            )
+                            // Padding(
+                            //   padding:  EdgeInsets.fromLTRB(responsive(8, context), 0, 0, responsive(25, context)),
+                            //   child: Container(
+                            //     child: normalText(
+                            //       color:Color.fromRGBO(169, 169, 169, 1),
+                            //       context: context,
+                            //       text: '(13K Reviews)'
+                            //
+                            //     ),
+                            //   ),
+                            // )
 
                           ],
                         ),
