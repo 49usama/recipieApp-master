@@ -328,16 +328,16 @@ class _ProfileState extends State<Profile> {
                               color: Color(0xFFA9A9A9).withOpacity(1),
                             ),
                           ),
-                          Padding(
-                            padding:  EdgeInsets.fromLTRB(responsive(20, context), 0, 0, responsive(20, context)),
-                            child: normalText(
-
-                              context: context,
-                              text: 'More...',
-                              center: false,
-                              color: Color(0x71B1A1).withOpacity(1),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding:  EdgeInsets.fromLTRB(responsive(20, context), 0, 0, responsive(20, context)),
+                          //   child: normalText(
+                          //
+                          //     context: context,
+                          //     text: 'More...',
+                          //     center: false,
+                          //     color: Color(0x71B1A1).withOpacity(1),
+                          //   ),
+                          // ),
 
                           Padding(
                             padding:  EdgeInsets.only(left: responsive(10, context),right: 5 ),
