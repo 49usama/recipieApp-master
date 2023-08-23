@@ -448,7 +448,7 @@ class _HomeState extends State<Home> {
 
                                       InkWell(
                                         onTap: (){
-                                          Get.to(Recipedetail(url:images[reversedIndex]  ,i:recipe.dataa![reversedIndex]));
+                                          Get.to(Recipedetail(url:recipe.dataa![reversedIndex].url ,i:recipe.dataa![reversedIndex]));
                                         },
                                         child: Padding(
                                           padding:  EdgeInsets.only(right: responsive(15, context)),

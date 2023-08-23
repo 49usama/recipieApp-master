@@ -7,7 +7,7 @@ import '../../Global Models/Model.dart';
 
 Widget  Search(BuildContext context,var onchange,onchan){
   return Container(
-    width: responsiveDesign(MediaQuery.of(context).size.width, context),
+    width: responsiveDesign(350, context),
     height: responsive(50, context),
     decoration: ShapeDecoration(
       color: Colors.white,
